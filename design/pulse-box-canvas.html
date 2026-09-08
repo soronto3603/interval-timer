@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="db564455-d166-4c5f-bc2a-cd9af0ea66d7"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* vietnamese */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("46dc4c0d-1a16-4ac4-bff0-3fbb5f785a89") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("0cf2a0e9-73f6-4df7-b79e-2c50ef5d7c72") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("e9427e25-f26e-4105-afff-29aca3a52c3c") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ded4ea91-7548-444b-b556-874fd46a3264") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ac5cb11d-1d0f-43dd-9a8d-6e55a746626b") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("52580e0f-78b7-40aa-97fb-6a1730b4ff69") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("a622ccdf-e4a0-49ba-afc3-462c04d05cbc") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("71579d6d-4646-4ef0-afc9-439b07cb5c2a") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("3ea8105e-da06-4721-8451-ff73000844af") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("660b8b6c-9108-40c7-aa1d-5d9683d716c3") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("6212d451-ba28-4de2-b8a2-2a92c6280934") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("7b2af27f-3c58-4624-981d-8e295bb6d2e1") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>/**
+ * Minified by jsDelivr using clean-css v5.3.3.
+ * Original file: /gh/orionCactus/pretendard@1.3.9/dist/web/static/pretendard.css
+ *
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+@font-face{font-family:Pretendard;font-weight:900;font-display:swap;src:local('Pretendard Black'),url("a0c48d86-6913-438e-bc7c-2cfbcf2a8c75") format('woff2'),url("48df5371-cf71-4bbf-8042-a0476b344a94") format('woff')}@font-face{font-family:Pretendard;font-weight:800;font-display:swap;src:local('Pretendard ExtraBold'),url("abd8975c-2dd4-43ef-bd8b-023a610d33a7") format('woff2'),url("5cbcb1a8-8d54-4adf-8aee-d264e00691f3") format('woff')}@font-face{font-family:Pretendard;font-weight:700;font-display:swap;src:local('Pretendard Bold'),url("ead6654d-96da-425e-ac57-e64fca12d476") format('woff2'),url("0e13849f-9c96-461c-b95a-4bb13f3fa6cd") format('woff')}@font-face{font-family:Pretendard;font-weight:600;font-display:swap;src:local('Pretendard SemiBold'),url("3e1a4c32-9cfd-4ae1-884f-152325457bca") format('woff2'),url("df5cd841-bec4-41c9-af73-173c69254be8") format('woff')}@font-face{font-family:Pretendard;font-weight:500;font-display:swap;src:local('Pretendard Medium'),url("68a3407f-d4fb-48b4-9561-2205eaf099f1") format('woff2'),url("dbc0d976-3701-4928-a653-beadee9ca3e3") format('woff')}@font-face{font-family:Pretendard;font-weight:400;font-display:swap;src:local('Pretendard Regular'),url("a749ac4d-dfe2-4cff-9573-518e1dac8e98") format('woff2'),url("a496d091-e924-4b8f-883e-2ca834e357cd") format('woff')}@font-face{font-family:Pretendard;font-weight:300;font-display:swap;src:local('Pretendard Light'),url("33a944a8-f3e8-473a-b376-7fce6e4f4f2a") format('woff2'),url("f9a6f859-4a62-404b-9b14-406f771d9983") format('woff')}@font-face{font-family:Pretendard;font-weight:200;font-display:swap;src:local('Pretendard ExtraLight'),url("b928690b-087b-49d4-9eba-10f1d888d38e") format('woff2'),url("3b4840b8-a010-4ac5-8a0e-1a3feeafa07f") format('woff')}@font-face{font-family:Pretendard;font-weight:100;font-display:swap;src:local('Pretendard Thin'),url("a4afe634-f3be-4a83-956f-5b40fc8adbfe") format('woff2'),url("6d1ba9f6-6a9c-4473-bead-be93757f1f1c") format('woff')}
+/*# sourceMappingURL=/sm/51b565c04cae0bb1ce2c86cd5d1809aca984a92cb3f8e3efe91c4d2950752c00.map */</style>
+<style>
+  body { margin:0; background:#070807; }
+  a { color:#B8FF2E; text-decoration:none; }
+  a:hover { color:#D6FF7A; }
+</style>
+</helmet>
+
+<div style="min-height:100%;background:#070807;padding:56px 48px 96px;font-family:Pretendard,-apple-system,sans-serif;display:flex;flex-direction:column;gap:56px">
+
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="font-family:Anton,sans-serif;font-size:44px;letter-spacing:0.01em;color:#F4F6F2;line-height:1">PULSE <span style="color:#B8FF2E">BOX</span></div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.22em;text-transform:uppercase;color:#7C837C">Android · Functional Fitness Timer · UI Frames</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;gap:14px">
+    <div style="font-family:Anton,sans-serif;font-size:28px;color:#F4F6F2;letter-spacing:0.01em">CORE FLOW</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">HOME → SETUP → WORK → REST → COMPLETE</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+    <!-- 01 HOME -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">01 — HOME</div>
+      <div data-screen-label="01 Home" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:26px">
+          <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+          <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+          </div>
+        </div>
+        <div style="font-size:24px;font-weight:700;color:#F4F6F2;letter-spacing:-0.01em;margin-bottom:18px">{{ t.selectWorkout }}</div>
+
+        <div style="background:#B8FF2E;border-radius:14px;height:96px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;margin-bottom:14px">
+          <div style="font-family:Anton,sans-serif;font-size:40px;color:#0A0B0A;letter-spacing:0.005em">QUICK START</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;color:#0A0B0A;line-height:1">›</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="background:#141614;border:1px solid #202320;border-radius:12px;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 22px">
+            <div style="font-family:Anton,sans-serif;font-size:30px;color:#F4F6F2">TABATA</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#6E756E;line-height:1">›</div>
+          </div>
+          <div style="background:#141614;border:1px solid #202320;border-radius:12px;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 22px">
+            <div style="font-family:Anton,sans-serif;font-size:30px;color:#F4F6F2">AMRAP</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#6E756E;line-height:1">›</div>
+          </div>
+          <div style="background:#141614;border:1px solid #202320;border-radius:12px;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 22px">
+            <div style="font-family:Anton,sans-serif;font-size:30px;color:#F4F6F2">EMOM</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#6E756E;line-height:1">›</div>
+          </div>
+          <div style="background:#141614;border:1px solid #202320;border-radius:12px;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 22px">
+            <div style="font-family:Anton,sans-serif;font-size:30px;color:#F4F6F2">FOR TIME</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;color:#6E756E;line-height:1">›</div>
+          </div>
+        </div>
+
+        <div style="margin-top:auto;padding-top:24px">
+          <div style="height:1px;background:#202320;margin-bottom:16px"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div style="font-size:15px;font-weight:600;color:#9AA199">{{ t.recent }}</div>
+            <div style="font-size:13px;color:#6E756E;display:flex;align-items:center;gap:4px">{{ t.viewAll }} <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px">›</span></div>
+          </div>
+          <div style="background:#131513;border:1px solid #1E211E;border-radius:12px;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px">
+            <div style="display:flex;align-items:baseline;gap:9px;min-width:0">
+              <span style="font-family:Anton,sans-serif;font-size:21px;color:#F4F6F2">TABATA</span>
+              <span style="font-size:13px;color:#8A918A;white-space:nowrap">{{ t.recentMeta }}</span>
+            </div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;color:#6E756E;line-height:1">›</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 SETUP -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">02 — TABATA SETUP</div>
+      <div data-screen-label="02 Tabata setup" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+          <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+          <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+          </div>
+        </div>
+
+        <div style="font-family:Anton,sans-serif;font-size:64px;line-height:0.95;color:#F4F6F2;letter-spacing:0.01em">TABATA</div>
+        <div style="font-size:20px;font-weight:600;color:#8A918A;margin-top:6px;margin-bottom:34px">{{ t.tabataSetup }}</div>
+
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <div>
+            <div style="font-size:19px;font-weight:700;color:#F4F6F2;margin-bottom:10px">{{ t.work }}</div>
+            <div style="display:flex;align-items:stretch;background:#141614;border:1px solid #202320;border-radius:14px;height:80px;overflow:hidden">
+              <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">−</div>
+              <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:46px;color:#F4F6F2;letter-spacing:0.01em">00:20</div>
+              <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">+</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:19px;font-weight:700;color:#F4F6F2;margin-bottom:10px">{{ t.rest }}</div>
+            <div style="display:flex;align-items:stretch;background:#141614;border:1px solid #202320;border-radius:14px;height:80px;overflow:hidden">
+              <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">−</div>
+              <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:46px;color:#F4F6F2;letter-spacing:0.01em">00:10</div>
+              <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">+</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:19px;font-weight:700;color:#F4F6F2;margin-bottom:10px">{{ t.rounds }}</div>
+            <div style="display:flex;align-items:stretch;background:#141614;border:1px solid #202320;border-radius:14px;height:80px;overflow:hidden">
+              <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">−</div>
+              <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:46px;color:#F4F6F2">8</div>
+              <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">+</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:auto;padding-top:28px">
+          <div style="background:#B8FF2E;border-radius:14px;height:88px;display:flex;align-items:center;justify-content:center">
+            <div style="font-family:Anton,sans-serif;font-size:44px;color:#0A0B0A;letter-spacing:0.02em">START</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 WORK -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">03 — WORK</div>
+      <div data-screen-label="03 Work timer" style="width:390px;height:844px;background:#0C0D0C;background-image:radial-gradient(#191C19 1px, transparent 1px);background-size:22px 22px;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 34px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:52px">
+          <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+          <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+          </div>
+        </div>
+
+        <div style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;letter-spacing:0.3em;color:#E6EAE4;margin-bottom:10px">ROUND 3 / 8</div>
+        <div style="text-align:center;font-family:Anton,sans-serif;font-size:150px;line-height:1;color:#B8FF2E;letter-spacing:0.01em;text-shadow:0 0 60px rgba(184,255,46,0.22)">00:17</div>
+
+        <div style="margin-top:22px;background:#B8FF2E;border-radius:14px;height:92px;display:flex;align-items:center;justify-content:center">
+          <div style="font-family:Anton,sans-serif;font-size:56px;color:#0A0B0A;letter-spacing:0.03em">WORK</div>
+        </div>
+
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:44px">
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E;box-shadow:0 0 0 4px rgba(184,255,46,0.18)"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#2B2E2B"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#2B2E2B"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#2B2E2B"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#2B2E2B"></div>
+        </div>
+
+        <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="width:132px;height:132px;border-radius:50%;background:#171A17;border:1.5px solid #2A2E2A;display:flex;align-items:center;justify-content:center;gap:11px">
+            <div style="width:13px;height:46px;border-radius:3px;background:#EFF2EC"></div>
+            <div style="width:13px;height:46px;border-radius:3px;background:#EFF2EC"></div>
+          </div>
+          <sc-if value="{{ showPauseHint }}" hint-placeholder-val="{{ true }}"><div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.22em;color:#5F665F">{{ t.holdToPause }}</div></sc-if>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 REST -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">04 — REST</div>
+      <div data-screen-label="04 Rest timer" style="width:390px;height:844px;background:#0C0D0C;background-image:radial-gradient(#191C19 1px, transparent 1px);background-size:22px 22px;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 34px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:52px">
+          <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+          <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+          </div>
+        </div>
+
+        <div style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;letter-spacing:0.3em;color:#E6EAE4;margin-bottom:10px">ROUND 3 / 8</div>
+        <div style="text-align:center;font-family:Anton,sans-serif;font-size:150px;line-height:1;color:#FF6B1A;letter-spacing:0.01em;text-shadow:0 0 60px rgba(255,107,26,0.22)">00:10</div>
+
+        <div style="margin-top:22px;background:#FF6B1A;border-radius:14px;height:92px;display:flex;align-items:center;justify-content:center">
+          <div style="font-family:Anton,sans-serif;font-size:56px;color:#160A03;letter-spacing:0.03em">REST</div>
+        </div>
+
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:44px">
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#B8FF2E"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#FF6B1A;box-shadow:0 0 0 4px rgba(255,107,26,0.2)"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#2B2E2B"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#2B2E2B"></div>
+          <div style="width:18px;height:18px;border-radius:50%;background:#2B2E2B"></div>
+        </div>
+
+        <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="width:132px;height:132px;border-radius:50%;background:#171A17;border:1.5px solid #2A2E2A;display:flex;align-items:center;justify-content:center;gap:11px">
+            <div style="width:13px;height:46px;border-radius:3px;background:#EFF2EC"></div>
+            <div style="width:13px;height:46px;border-radius:3px;background:#EFF2EC"></div>
+          </div>
+          <sc-if value="{{ showPauseHint }}" hint-placeholder-val="{{ true }}"><div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.22em;color:#5F665F">{{ t.holdToPause }}</div></sc-if>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 COMPLETE -->
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">05 — COMPLETE</div>
+      <div data-screen-label="05 Complete" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:56px">
+          <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+          <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+            <div style="height:2.5px;background:#F4F6F2"></div>
+          </div>
+        </div>
+
+        <div style="text-align:center;font-family:Anton,sans-serif;font-size:66px;line-height:1;color:#F4F6F2;letter-spacing:0.01em">COMPLETE</div>
+        <div style="height:1px;background:#2A2E2A;margin:30px 4px 26px"></div>
+        <div style="text-align:center;font-size:24px;font-weight:700;color:#F4F6F2;margin-bottom:30px">{{ t.todaysTabata }}</div>
+
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 4px;border-top:1px solid #202320">
+            <div style="font-size:18px;font-weight:600;color:#9AA199">{{ t.rounds }}</div>
+            <div style="font-family:Anton,sans-serif;font-size:32px;color:#F4F6F2">8 / 8</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 4px;border-top:1px solid #202320">
+            <div style="font-size:18px;font-weight:600;color:#9AA199">{{ t.work }}</div>
+            <div style="font-family:Anton,sans-serif;font-size:32px;color:#F4F6F2">00:20</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 4px;border-top:1px solid #202320">
+            <div style="font-size:18px;font-weight:600;color:#9AA199">{{ t.rest }}</div>
+            <div style="font-family:Anton,sans-serif;font-size:32px;color:#F4F6F2">00:10</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 4px;border-top:1px solid #202320;border-bottom:1px solid #202320">
+            <div style="font-size:18px;font-weight:600;color:#9AA199">{{ t.totalTime }}</div>
+            <div style="font-family:Anton,sans-serif;font-size:32px;color:#B8FF2E">04:00</div>
+          </div>
+        </div>
+
+        <div style="margin-top:auto;padding-top:28px">
+          <div style="background:#B8FF2E;border-radius:14px;height:88px;display:flex;align-items:center;justify-content:center">
+            <div style="font-family:Anton,sans-serif;font-size:44px;color:#0A0B0A;letter-spacing:0.02em">DONE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- FLOW: PREP → PAUSED → CONFIRM -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <div style="font-family:Anton,sans-serif;font-size:28px;color:#F4F6F2;letter-spacing:0.01em">TIMER FLOW</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">PREP → WORK → REST → PAUSED → COMPLETE</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+      <!-- 06 PREP -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">06 — PREP COUNTDOWN</div>
+        <div data-screen-label="06 Prep countdown" style="width:390px;height:844px;background:#0C0D0C;background-image:radial-gradient(#191C19 1px, transparent 1px);background-size:22px 22px;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 34px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+            <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+            </div>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px">
+            <div style="font-family:Anton,sans-serif;font-size:210px;line-height:0.9;color:#2E8DFF;text-shadow:0 0 70px rgba(46,141,255,0.28)">03</div>
+            <div style="width:100%;background:#2E8DFF;border-radius:14px;height:92px;display:flex;align-items:center;justify-content:center">
+              <div style="font-family:Anton,sans-serif;font-size:56px;color:#03101F;letter-spacing:0.03em">READY</div>
+            </div>
+          </div>
+          <div style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.26em;color:#8A918A">TABATA · 8 ROUNDS</div>
+        </div>
+      </div>
+
+      <!-- 07 PAUSED -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">07 — PAUSED OVERLAY</div>
+        <div data-screen-label="07 Paused overlay" style="position:relative;width:390px;height:844px;box-sizing:border-box;background:#0C0D0C;background-image:radial-gradient(#191C19 1px, transparent 1px);background-size:22px 22px;border:1px solid #1E211E;border-radius:40px;overflow:hidden">
+          <div style="position:absolute;inset:0;padding:28px 22px 34px;box-sizing:border-box;display:flex;flex-direction:column;opacity:0.28">
+            <div style="text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:26px;letter-spacing:0.3em;color:#E6EAE4;margin-top:262px;margin-bottom:10px">ROUND 3 / 8</div>
+            <div style="text-align:center;font-family:Anton,sans-serif;font-size:150px;line-height:1;color:#B8FF2E">00:17</div>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(6,7,6,0.93);padding:28px 22px 34px;box-sizing:border-box;display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+              <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+                <div style="height:2.5px;background:#F4F6F2"></div>
+                <div style="height:2.5px;background:#F4F6F2"></div>
+                <div style="height:2.5px;background:#F4F6F2"></div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+              <div style="font-family:Anton,sans-serif;font-size:76px;line-height:1;color:#F4F6F2;letter-spacing:0.02em">PAUSED</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.26em;color:#6E756E">ROUND 3 / 8 · 00:17</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="background:#B8FF2E;border-radius:14px;height:88px;display:flex;align-items:center;justify-content:center">
+                <div style="font-family:Anton,sans-serif;font-size:44px;color:#0A0B0A;letter-spacing:0.02em">RESUME</div>
+              </div>
+              <div style="border:1.5px solid #2E332E;border-radius:14px;height:72px;display:flex;align-items:center;justify-content:center">
+                <div style="font-family:Anton,sans-serif;font-size:30px;color:#C9CFC7;letter-spacing:0.02em">RESET</div>
+              </div>
+              <div style="height:60px;display:flex;align-items:center;justify-content:center">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;letter-spacing:0.2em;color:#7C837C">END WORKOUT</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 RESET CONFIRM -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">08 — RESET CONFIRMATION</div>
+        <div data-screen-label="08 Reset confirmation" style="position:relative;width:390px;height:844px;box-sizing:border-box;background:#0C0D0C;background-image:radial-gradient(#191C19 1px, transparent 1px);background-size:22px 22px;border:1px solid #1E211E;border-radius:40px;overflow:hidden">
+          <div style="position:absolute;inset:0;padding:28px 22px;box-sizing:border-box;opacity:0.18">
+            <div style="text-align:center;font-family:Anton,sans-serif;font-size:76px;color:#F4F6F2;margin-top:330px">PAUSED</div>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(6,7,6,0.9);display:flex;align-items:center;justify-content:center;padding:22px;box-sizing:border-box">
+            <div style="width:100%;background:#141614;border:1px solid #262A26;border-radius:18px;padding:34px 26px 26px;box-sizing:border-box">
+              <div style="font-family:Anton,sans-serif;font-size:46px;line-height:1.05;color:#F4F6F2;letter-spacing:0.01em">RESET TIMER?</div>
+              <div style="font-size:16px;color:#9AA199;margin-top:12px;line-height:1.6">{{ t.resetBody }}</div>
+              <div style="height:1px;background:#262A26;margin:26px 0 20px"></div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="background:#FF6B1A;border-radius:12px;height:72px;display:flex;align-items:center;justify-content:center">
+                  <div style="font-family:Anton,sans-serif;font-size:32px;color:#160A03;letter-spacing:0.02em">RESET</div>
+                </div>
+                <div style="border:1.5px solid #2E332E;border-radius:12px;height:64px;display:flex;align-items:center;justify-content:center">
+                  <div style="font-family:Anton,sans-serif;font-size:26px;color:#C9CFC7;letter-spacing:0.02em">CANCEL</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09 END CONFIRM -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">09 — END WORKOUT CONFIRMATION</div>
+        <div data-screen-label="09 End workout confirmation" style="position:relative;width:390px;height:844px;box-sizing:border-box;background:#0C0D0C;background-image:radial-gradient(#191C19 1px, transparent 1px);background-size:22px 22px;border:1px solid #1E211E;border-radius:40px;overflow:hidden">
+          <div style="position:absolute;inset:0;padding:28px 22px;box-sizing:border-box;opacity:0.18">
+            <div style="text-align:center;font-family:Anton,sans-serif;font-size:76px;color:#F4F6F2;margin-top:330px">PAUSED</div>
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(6,7,6,0.9);display:flex;align-items:center;justify-content:center;padding:22px;box-sizing:border-box">
+            <div style="width:100%;background:#141614;border:1px solid #262A26;border-radius:18px;padding:34px 26px 26px;box-sizing:border-box">
+              <div style="font-family:Anton,sans-serif;font-size:46px;line-height:1.05;color:#F4F6F2;letter-spacing:0.01em">END WORKOUT?</div>
+              <div style="font-size:16px;color:#9AA199;margin-top:12px;line-height:1.6">{{ t.endBody }}</div>
+              <div style="height:1px;background:#262A26;margin:26px 0 20px"></div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="background:#B8FF2E;border-radius:12px;height:72px;display:flex;align-items:center;justify-content:center">
+                  <div style="font-family:Anton,sans-serif;font-size:30px;color:#0A0B0A;letter-spacing:0.02em">KEEP GOING</div>
+                </div>
+                <div style="border:1.5px solid #33302C;border-radius:12px;height:64px;display:flex;align-items:center;justify-content:center">
+                  <div style="font-family:Anton,sans-serif;font-size:26px;color:#C08A5E;letter-spacing:0.02em">END</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODE SETUP -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <div style="font-family:Anton,sans-serif;font-size:28px;color:#F4F6F2;letter-spacing:0.01em">MODE SETUP</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">SAME ROW · STEPPER · CTA STRUCTURE AS TABATA</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+      <!-- 10 AMRAP -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">10 — AMRAP SETUP</div>
+        <div data-screen-label="10 AMRAP setup" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+            <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+            <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+            </div>
+          </div>
+          <div style="font-family:Anton,sans-serif;font-size:64px;line-height:0.95;color:#F4F6F2;letter-spacing:0.01em">AMRAP</div>
+          <div style="font-size:20px;font-weight:600;color:#8A918A;margin-top:6px;margin-bottom:34px">{{ t.setupWorkout }}</div>
+
+          <div style="display:flex;flex-direction:column;gap:26px">
+            <div>
+              <div style="font-size:19px;font-weight:700;color:#F4F6F2;margin-bottom:10px">{{ t.time }}</div>
+              <div style="display:flex;align-items:stretch;background:#141614;border:1px solid #202320;border-radius:14px;height:80px;overflow:hidden">
+                <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">−</div>
+                <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:46px;color:#F4F6F2;letter-spacing:0.01em">12:00</div>
+                <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">+</div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:19px;font-weight:700;color:#F4F6F2;margin-bottom:10px">{{ t.countMethod }}</div>
+              <div style="display:flex;gap:10px">
+                <div style="flex:1;height:72px;border-radius:14px;background:#B8FF2E;display:flex;align-items:center;justify-content:center">
+                  <div style="font-family:Anton,sans-serif;font-size:26px;color:#0A0B0A;letter-spacing:0.02em">ROUNDS</div>
+                </div>
+                <div style="flex:1;height:72px;border-radius:14px;background:#141614;border:1px solid #202320;display:flex;align-items:center;justify-content:center">
+                  <div style="font-family:Anton,sans-serif;font-size:26px;color:#7C837C;letter-spacing:0.02em">REPS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:auto;padding-top:28px">
+            <div style="background:#B8FF2E;border-radius:14px;height:88px;display:flex;align-items:center;justify-content:center">
+              <div style="font-family:Anton,sans-serif;font-size:44px;color:#0A0B0A;letter-spacing:0.02em">START</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 EMOM -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">11 — EMOM SETUP</div>
+        <div data-screen-label="11 EMOM setup" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+            <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+            <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+            </div>
+          </div>
+          <div style="font-family:Anton,sans-serif;font-size:64px;line-height:0.95;color:#F4F6F2;letter-spacing:0.01em">EMOM</div>
+          <div style="font-size:20px;font-weight:600;color:#8A918A;margin-top:6px;margin-bottom:34px">{{ t.setupWorkout }}</div>
+
+          <div style="display:flex;flex-direction:column;gap:26px">
+            <div>
+              <div style="font-size:19px;font-weight:700;color:#F4F6F2;margin-bottom:10px">{{ t.minutes }}</div>
+              <div style="display:flex;align-items:stretch;background:#141614;border:1px solid #202320;border-radius:14px;height:80px;overflow:hidden">
+                <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">−</div>
+                <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:46px;color:#F4F6F2">10</div>
+                <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">+</div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:19px;font-weight:700;color:#F4F6F2;margin-bottom:10px">{{ t.interval }}</div>
+              <div style="display:flex;align-items:stretch;background:#141614;border:1px solid #202320;border-radius:14px;height:80px;overflow:hidden">
+                <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">−</div>
+                <div style="flex:1;display:flex;align-items:center;justify-content:center;font-family:Anton,sans-serif;font-size:46px;color:#F4F6F2;letter-spacing:0.01em">01:00</div>
+                <div style="width:78px;display:flex;align-items:center;justify-content:center;background:#1A1D1A;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:38px;color:#C9CFC7;line-height:1">+</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 4px">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:0.22em;color:#6E756E">TOTAL</div>
+              <div style="font-family:Anton,sans-serif;font-size:34px;color:#B8FF2E">10:00</div>
+            </div>
+          </div>
+
+          <div style="margin-top:auto;padding-top:28px">
+            <div style="background:#B8FF2E;border-radius:14px;height:88px;display:flex;align-items:center;justify-content:center">
+              <div style="font-family:Anton,sans-serif;font-size:44px;color:#0A0B0A;letter-spacing:0.02em">START</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 FOR TIME -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">12 — FOR TIME SETUP</div>
+        <div data-screen-label="12 For Time setup" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+            <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+            <div style="display:flex;flex-direction:column;gap:5px;width:26px">
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+              <div style="height:2.5px;background:#F4F6F2"></div>
+            </div>
+          </div>
+          <div style="font-family:Anton,sans-serif;font-size:64px;line-height:0.95;color:#F4F6F2;letter-spacing:0.01em">FOR TIME</div>
+          <div style="font-size:20px;font-weight:600;color:#8A918A;margin-top:6px;margin-bottom:34px">{{ t.setupWorkout }}</div>
+
+          <div style="display:flex;flex-direction:column;gap:22px">
+            <div style="display:flex;align-items:center;justify-content:space-between;background:#141614;border:1px solid #202320;border-radius:14px;height:96px;padding:0 24px">
+              <div>
+                <div style="font-size:19px;font-weight:700;color:#F4F6F2">{{ t.timeLimit }}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:0.2em;color:#6E756E;margin-top:4px">COUNT UP</div>
+              </div>
+              <div style="font-family:Anton,sans-serif;font-size:34px;color:#8A918A">{{ t.noLimit }}</div>
+            </div>
+            <div style="border:1.5px dashed #2E332E;border-radius:14px;height:76px;display:flex;align-items:center;justify-content:center;gap:10px">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;color:#B8FF2E;line-height:1">+</div>
+              <div style="font-size:18px;font-weight:700;color:#B8FF2E">{{ t.addTimeLimit }}</div>
+            </div>
+            <div style="text-align:center;font-family:Anton,sans-serif;font-size:120px;line-height:1;color:#22261F;letter-spacing:0.01em;margin-top:10px">00:00</div>
+          </div>
+
+          <div style="margin-top:auto;padding-top:28px">
+            <div style="background:#B8FF2E;border-radius:14px;height:88px;display:flex;align-items:center;justify-content:center">
+              <div style="font-family:Anton,sans-serif;font-size:44px;color:#0A0B0A;letter-spacing:0.02em">START</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;align-items:baseline;gap:14px">
+      <div style="font-family:Anton,sans-serif;font-size:28px;color:#F4F6F2;letter-spacing:0.01em">SETTINGS</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">FROM THE HAMBURGER MENU</div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+      <!-- 13 SETTINGS -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">13 — SETTINGS</div>
+        <div data-screen-label="13 Settings" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+            <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;color:#F4F6F2;line-height:1">✕</div>
+          </div>
+          <div style="font-family:Anton,sans-serif;font-size:56px;line-height:0.95;color:#F4F6F2;letter-spacing:0.01em">SETTINGS</div>
+          <div style="font-size:20px;font-weight:600;color:#8A918A;margin-top:6px;margin-bottom:34px">{{ t.settings }}</div>
+
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:78px;border-top:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2">{{ t.language }}</div>
+              <div style="display:flex;align-items:center;gap:10px;min-width:0">
+                <div style="font-size:17px;color:#9AA199;white-space:nowrap">{{ t.languageValue }}</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;color:#6E756E;line-height:1">›</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:78px;border-top:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2">{{ t.sound }}</div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:0.16em;color:#B8FF2E">ON</div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;color:#6E756E;line-height:1">›</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:78px;border-top:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2">{{ t.vibration }}</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:0.16em;color:#B8FF2E">ON</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:78px;border-top:1px solid #202320;border-bottom:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2">{{ t.keepAwake }}</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:0.16em;color:#B8FF2E">ON</div>
+            </div>
+          </div>
+
+          <div style="margin-top:auto;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.22em;color:#4A504A;text-align:center">PULSE BOX 1.0</div>
+        </div>
+      </div>
+
+      <!-- 14 LANGUAGE -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">14 — LANGUAGE</div>
+        <div data-screen-label="14 Language" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;color:#F4F6F2;line-height:1">‹</div>
+            <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+            <div style="width:16px"></div>
+          </div>
+          <div style="font-family:Anton,sans-serif;font-size:56px;line-height:0.95;color:#F4F6F2;letter-spacing:0.01em">LANGUAGE</div>
+          <div style="font-size:20px;font-weight:600;color:#8A918A;margin-top:6px;margin-bottom:34px">{{ t.language }}</div>
+
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:#141614;border:1.5px solid #B8FF2E;border-radius:14px;height:84px;padding:0 24px">
+              <div style="font-size:20px;font-weight:700;color:#F4F6F2">한국어</div>
+              <div style="width:30px;height:30px;border-radius:50%;background:#B8FF2E;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:#0A0B0A;line-height:1">✓</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:#141614;border:1px solid #202320;border-radius:14px;height:84px;padding:0 24px">
+              <div style="font-size:20px;font-weight:700;color:#9AA199">English</div>
+              <div style="width:30px;height:30px;border-radius:50%;border:1.5px solid #2E332E"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15 SOUND -->
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">15 — SOUND &amp; HAPTICS</div>
+        <div data-screen-label="15 Sound and haptics" style="width:390px;height:844px;background:#0C0D0C;border:1px solid #1E211E;border-radius:40px;padding:28px 22px 26px;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:30px">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:30px;color:#F4F6F2;line-height:1">‹</div>
+            <div style="font-family:Anton,sans-serif;font-size:22px;font-style:italic;letter-spacing:0.04em;color:#F4F6F2">PULSE <span style="color:#B8FF2E">BOX</span></div>
+            <div style="width:16px"></div>
+          </div>
+          <div style="font-family:Anton,sans-serif;font-size:56px;line-height:0.95;color:#F4F6F2;letter-spacing:0.01em">SOUND</div>
+          <div style="font-size:20px;font-weight:600;color:#8A918A;margin-top:6px;margin-bottom:34px">{{ t.soundHaptics }}</div>
+
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:86px;border-top:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2;min-width:0">{{ t.countdownAlert }}</div>
+              <div style="width:60px;height:34px;border-radius:17px;background:#B8FF2E;display:flex;align-items:center;justify-content:flex-end;padding:0 4px;box-sizing:border-box;flex:none">
+                <div style="width:26px;height:26px;border-radius:50%;background:#0A0B0A"></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:86px;border-top:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2;min-width:0">{{ t.workStartAlert }}</div>
+              <div style="width:60px;height:34px;border-radius:17px;background:#B8FF2E;display:flex;align-items:center;justify-content:flex-end;padding:0 4px;box-sizing:border-box;flex:none">
+                <div style="width:26px;height:26px;border-radius:50%;background:#0A0B0A"></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:86px;border-top:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2;min-width:0">{{ t.restStartAlert }}</div>
+              <div style="width:60px;height:34px;border-radius:17px;background:#FF6B1A;display:flex;align-items:center;justify-content:flex-end;padding:0 4px;box-sizing:border-box;flex:none">
+                <div style="width:26px;height:26px;border-radius:50%;background:#160A03"></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;height:86px;border-top:1px solid #202320;border-bottom:1px solid #202320;padding:0 4px">
+              <div style="font-size:18px;font-weight:600;color:#F4F6F2;min-width:0">{{ t.vibration }}</div>
+              <div style="width:60px;height:34px;border-radius:17px;background:#22261F;border:1px solid #2E332E;display:flex;align-items:center;padding:0 4px;box-sizing:border-box;flex:none">
+                <div style="width:26px;height:26px;border-radius:50%;background:#4A504A"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOKENS -->
+  <sc-if value="{{ showTokens }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-direction:column;gap:26px;max-width:1240px">
+    <div style="font-family:Anton,sans-serif;font-size:34px;color:#F4F6F2;letter-spacing:0.01em">DESIGN TOKENS</div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">COLOR</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#070807;border:1px solid #232623"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">bg/void #070807</div><div style="font-size:12px;color:#6E756E">앱 배경</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#0C0D0C;border:1px solid #232623"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">bg/screen #0C0D0C</div><div style="font-size:12px;color:#6E756E">화면 배경</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#141614;border:1px solid #232623"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">surface #141614</div><div style="font-size:12px;color:#6E756E">행 · 입력</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#202320"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">line #202320</div><div style="font-size:12px;color:#6E756E">구분선 1px</div></div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">STATE</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#B8FF2E"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">work/lime #B8FF2E</div><div style="font-size:12px;color:#6E756E">운동 · 1차 액션</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#FF6B1A"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">rest/orange #FF6B1A</div><div style="font-size:12px;color:#6E756E">휴식</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#2E8DFF"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">prep/blue #2E8DFF</div><div style="font-size:12px;color:#6E756E">준비 카운트다운</div></div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:8px;background:#F4F6F2"></div><div><div style="font-size:14px;color:#E6EAE4;font-weight:600">ink #F4F6F2 / muted #8A918A</div><div style="font-size:12px;color:#6E756E">본문 · 보조</div></div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">TYPE</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div><div style="font-family:Anton,sans-serif;font-size:40px;color:#F4F6F2;line-height:1">00:17</div><div style="font-size:12px;color:#6E756E;margin-top:4px">display/timer — Anton 150 / 1.0 / +0.01em</div></div>
+          <div><div style="font-family:Anton,sans-serif;font-size:26px;color:#F4F6F2;line-height:1">TABATA · WORK</div><div style="font-size:12px;color:#6E756E;margin-top:4px">display/mode — Anton 30–66</div></div>
+          <div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:0.3em;color:#F4F6F2">ROUND 3 / 8</div><div style="font-size:12px;color:#6E756E;margin-top:4px">label/sports — Barlow Condensed 700 / +0.3em</div></div>
+          <div><div style="font-size:19px;font-weight:700;color:#F4F6F2">운동 · 휴식 · 라운드</div><div style="font-size:12px;color:#6E756E;margin-top:4px">label/ko — Pretendard 600–700 / 자간 0</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;letter-spacing:0.2em;color:#6E756E">SPACING · RADIUS · TOUCH</div>
+        <div style="font-size:14px;color:#9AA199;line-height:1.9">
+          <div>space 4 · 8 · 12 · 22 · 26 · 34 · 52 (4pt 기반)</div>
+          <div>screen padding 22px / safe bottom 26px</div>
+          <div>radius: row 12 · control 14 · screen 40</div>
+          <div>touch: row 72 · stepper 80 · CTA 88 · pause 132</div>
+          <div>divider 1px #202320, 카드 그림자 없음</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #202320;padding-top:20px;font-size:14px;color:#8A918A;line-height:1.9;max-width:760px">
+      로컬라이제이션: PULSE BOX · TABATA · WORK · REST 등 디스플레이 워드는 두 언어판 공통으로 유지하고, 기능 레이블만 전환합니다. 모든 레이블은 좌측 정렬 + 값 우측 정렬 구조라 영문 전환 시 길이 차이를 행 내부에서 흡수합니다. 상단 우측 메뉴 → 언어 설정에서 시스템 언어 기본값을 덮어쓸 수 있습니다.
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;language&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;한국어&quot;,&quot;English&quot;],&quot;default&quot;:&quot;한국어&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Localization&quot;},&quot;showTokens&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Board&quot;},&quot;showPauseHint&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Board&quot;}}">
+const STRINGS = {
+  ko: {
+    selectWorkout: "운동 선택", recent: "최근 운동", viewAll: "전체 보기",
+    recentMeta: "· 20초 / 10초 · 8라운드", tabataSetup: "타바타 설정",
+    work: "운동", rest: "휴식", rounds: "라운드", totalTime: "총 시간",
+    todaysTabata: "오늘의 타바타", holdToPause: "길게 눌러 일시정지",
+    setupWorkout: "운동 설정", time: "시간", countMethod: "카운트 방식",
+    minutes: "분", interval: "인터벌", timeLimit: "시간 제한", noLimit: "제한 없음",
+    addTimeLimit: "시간 제한 추가", settings: "설정", language: "언어",
+    sound: "사운드", vibration: "진동", keepAwake: "화면 유지",
+    soundHaptics: "사운드 및 진동", countdownAlert: "카운트다운 알림",
+    workStartAlert: "운동 시작 알림", restStartAlert: "휴식 시작 알림",
+    resetBody: "현재 라운드와 시간이 초기화됩니다.",
+    endBody: "진행 중인 운동을 종료합니다.", languageValue: "한국어"
+  },
+  en: {
+    selectWorkout: "Select workout", recent: "Recent", viewAll: "View all",
+    recentMeta: "· 20s / 10s · 8 rounds", tabataSetup: "Tabata setup",
+    work: "Work", rest: "Rest", rounds: "Rounds", totalTime: "Total time",
+    todaysTabata: "Today's Tabata", holdToPause: "Hold to pause",
+    setupWorkout: "Workout setup", time: "Time", countMethod: "Count",
+    minutes: "Minutes", interval: "Interval", timeLimit: "Time cap", noLimit: "None",
+    addTimeLimit: "Add time cap", settings: "Settings", language: "Language",
+    sound: "Sound", vibration: "Vibration", keepAwake: "Keep screen on",
+    soundHaptics: "Sound & haptics", countdownAlert: "Countdown cue",
+    workStartAlert: "Work start cue", restStartAlert: "Rest start cue",
+    resetBody: "Current round and time will be reset.",
+    endBody: "This ends the workout in progress.", languageValue: "English"
+  }
+};
+
+class Component extends DCLogic {
+  renderVals() {
+    const lang = this.props.language === "English" ? "en" : "ko";
+    return {
+      t: STRINGS[lang],
+      showTokens: this.props.showTokens ?? true,
+      showPauseHint: this.props.showPauseHint ?? true
+    };
+  }
+}
+</script>
+
+
+</body></html>

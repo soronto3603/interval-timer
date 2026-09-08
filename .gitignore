@@ -1,0 +1,12 @@
+node_modules/
+.expo/
+dist/
+web-build/
+android/
+ios/
+*.log
+.DS_Store
+.env*.local
+
+# 22MB Claude Design 번들 원본. 추출본 design/pulse-box-canvas.html 을 추적한다
+pulse-box-ui.html
