@@ -17,10 +17,11 @@ describe('compile — tabata', () => {
       'work',
       'rest',
       'work',
+      'rest',
     ]);
   });
 
-  it('마지막 rest 를 생략한다', () => {
+  it('마지막 라운드의 rest 도 낸다 — 정통 타바타는 8×(20+10)=4분이다', () => {
     const segments = compile({
       mode: 'tabata',
       workMs: 20_000,
@@ -28,11 +29,16 @@ describe('compile — tabata', () => {
       rounds: 8,
     });
 
-    expect(segments).toHaveLength(1 + 8 * 2 - 1);
-    expect(segments[segments.length - 1].kind).toBe('work');
+    expect(segments).toHaveLength(1 + 8 * 2);
+    expect(segments[segments.length - 1].kind).toBe('rest');
+
+    const workoutMs = segments
+      .slice(1)
+      .reduce((sum, s) => sum + (s.durationMs ?? 0), 0);
+    expect(workoutMs).toBe(240_000); // 디자인 05번의 총 시간 04:00
   });
 
-  it('라운드가 1이면 rest 가 아예 없다', () => {
+  it('라운드가 1이어도 work/rest 한 쌍이다', () => {
     const segments = compile({
       mode: 'tabata',
       workMs: 20_000,
@@ -40,7 +46,7 @@ describe('compile — tabata', () => {
       rounds: 1,
     });
 
-    expect(segments.map((s) => s.kind)).toEqual(['prep', 'work']);
+    expect(segments.map((s) => s.kind)).toEqual(['prep', 'work', 'rest']);
   });
 
   it('work/rest 를 같은 라운드 번호로 묶고 총 라운드를 실는다', () => {
@@ -58,6 +64,7 @@ describe('compile — tabata', () => {
       ['work', 0, 2],
       ['rest', 0, 2],
       ['work', 1, 2],
+      ['rest', 1, 2],
     ]);
   });
 
@@ -74,6 +81,7 @@ describe('compile — tabata', () => {
       20_000,
       10_000,
       20_000,
+      10_000,
     ]);
   });
 

@@ -1,10 +1,41 @@
 {
-  "plugins": [
-    "expo-router",
-    "expo-status-bar",
-    "expo-font",
-    "expo-splash-screen",
-    "expo-audio",
-    "expo-localization"
-  ]
+  "expo": {
+    "name": "PULSE BOX",
+    "slug": "pulse-box",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "pulsebox",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#070807",
+    "newArchEnabled": true,
+    "android": {
+      "package": "kr.co.devd.pulsebox",
+      "adaptiveIcon": {
+        "backgroundColor": "#0C0D0C",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "edgeToEdgeEnabled": true
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "kr.co.devd.pulsebox"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-audio",
+      "expo-localization",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0C0D0C",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160
+        }
+      ]
+    ]
+  }
 }

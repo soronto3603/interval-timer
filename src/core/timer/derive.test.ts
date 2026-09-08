@@ -11,7 +11,7 @@ const running = (overrides: Partial<Anchor> = {}): Anchor => ({
   ...overrides,
 });
 
-// prep 3s → work 20s → rest 10s → work 20s  (총 53s)
+// prep 3s → work 20s → rest 10s → work 20s → rest 10s  (총 63s)
 const tabata2 = compile({
   mode: 'tabata',
   workMs: 20_000,
@@ -73,23 +73,23 @@ describe('derive — 세그먼트 위치', () => {
 
 describe('derive — 완료', () => {
   it('마지막 세그먼트가 끝나는 순간 complete 이 된다', () => {
-    const s = derive(tabata2, running(), T0 + 53_000);
+    const s = derive(tabata2, running(), T0 + 63_000);
 
     expect(s.phase).toBe('complete');
     expect(s.segmentIndex).toBe(tabata2.length);
-    expect(s.segment.kind).toBe('work');
+    expect(s.segment.kind).toBe('rest');
     expect(s.remainingMs).toBe(0);
   });
 
   it('완료 후 한참 지나도 complete 에 머문다', () => {
-    const s = derive(tabata2, running(), T0 + 53_000 + 600_000);
+    const s = derive(tabata2, running(), T0 + 63_000 + 600_000);
 
     expect(s.phase).toBe('complete');
     expect(s.segmentIndex).toBe(tabata2.length);
   });
 
   it('마지막 세그먼트 1ms 전에는 아직 complete 가 아니다', () => {
-    const s = derive(tabata2, running(), T0 + 52_999);
+    const s = derive(tabata2, running(), T0 + 62_999);
 
     expect(s.phase).toBe('running');
     expect(s.remainingMs).toBe(1);
@@ -127,8 +127,8 @@ describe('derive — 일시정지', () => {
   });
 
   it('일시정지가 완료 상태를 가리지 않는다', () => {
-    const anchor = running({ pausedAt: T0 + 53_000 });
-    const s = derive(tabata2, anchor, T0 + 53_000);
+    const anchor = running({ pausedAt: T0 + 63_000 });
+    const s = derive(tabata2, anchor, T0 + 63_000);
 
     expect(s.phase).toBe('complete');
   });

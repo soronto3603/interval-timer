@@ -11,7 +11,7 @@ const ANCHOR = start(T0);
 const at = (segments: Segment[], ms: number) =>
   derive(segments, ANCHOR, T0 + ms);
 
-// prep 3s → work 20s → rest 10s → work 20s
+// prep 3s → work 20s → rest 10s → work 20s → rest 10s
 const tabata2 = compile({
   mode: 'tabata',
   workMs: 20_000,
@@ -54,7 +54,7 @@ describe('cuesFor — 세그먼트 경계', () => {
   });
 
   it('완료 진입에는 큐가 없다', () => {
-    const cues = cuesFor(at(tabata2, 52_950), at(tabata2, 53_050), TICK);
+    const cues = cuesFor(at(tabata2, 62_950), at(tabata2, 63_050), TICK);
 
     expect(cues).toEqual([]);
   });

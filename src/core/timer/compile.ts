@@ -25,10 +25,9 @@ export function compile(config: ModeConfig): Segment[] {
       const segments: Segment[] = [prep(config.rounds)];
       for (let r = 0; r < config.rounds; r++) {
         segments.push(seg('work', config.workMs, r, config.rounds));
-        // 마지막 라운드의 rest 는 생략한다: 운동은 work 로 끝나야 한다
-        if (r < config.rounds - 1) {
-          segments.push(seg('rest', config.restMs, r, config.rounds));
-        }
+        // 마지막 라운드의 rest 도 낸다. 정통 타바타는 20초 on / 10초 off × 8 =
+        // 정확히 4분이고, 디자인 05번의 총 시간 04:00 도 그 값이다.
+        segments.push(seg('rest', config.restMs, r, config.rounds));
       }
       return segments;
     }

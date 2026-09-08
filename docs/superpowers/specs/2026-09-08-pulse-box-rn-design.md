@@ -95,7 +95,7 @@ type TimerState = {
   phase: 'running' | 'paused' | 'complete'
   segmentIndex: number
   segment: Segment
-  remainingMs: number | null  // countUp 세그먼트는 null
+  remainingMs: number | null  // durationMs 가 null 인 세그먼트만 null
   elapsedInSegmentMs: number
   totalElapsedMs: number
 }
@@ -123,9 +123,13 @@ elapsed = max(0, effNow - startedAt - pausedTotalMs)
 
 `PREP_SECONDS = 3` (v1에서 사용자 설정 아님. 디자인 06번의 "03"에 해당)
 
+타바타는 마지막 라운드의 `rest` 도 낸다. 정통 타바타 프로토콜이 20초 on / 10초 off
+× 8 = 정확히 4분이고, 디자인 05번 Complete 화면의 총 시간 `04:00` 도 그 값이다
+(8 × 20 + 7 × 10 이면 03:50 이 되어 디자인과 어긋난다).
+
 | 모드 | 세그먼트 |
 |---|---|
-| TABATA | `prep` + `[work, rest] × rounds`, 마지막 `rest` 생략 |
+| TABATA | `prep` + `[work, rest] × rounds` |
 | EMOM | `prep` + `interval × count` |
 | AMRAP | `prep` + `amrap(총시간)` 1개 |
 | FOR TIME | `prep` + `fortime(cap ?? null)`, `countUp: true` |
@@ -253,8 +257,11 @@ touch   row 72 · stepper 80 · CTA 88 · pause 132
 - Anton → `@expo-google-fonts/anton`
 - Barlow Condensed 600/700 → `@expo-google-fonts/barlow-condensed`
 - Pretendard 400/600/700 → npm `pretendard@1.3.9`의
-  `dist/public/static/alternative/Pretendard-{Regular,SemiBold,Bold}.ttf`를
-  `assets/fonts/`로 복사 (약 4.5MB). 서브셋팅은 나중 최적화 과제로 남긴다
+  `dist/public/static/Pretendard-{Regular,SemiBold,Bold}.otf`를 `assets/fonts/`로
+  받는다 (4.5MB). 같은 경로의 `alternative/*.ttf` 는 웨이트당 2.6MB로 합계 7.7MB라
+  OTF 를 쓴다. 특정 기기에서 CFF 렌더링 문제가 보이면 파일만 TTF 로 교체하면 된다.
+  서브셋팅은 나중 최적화 과제로 남긴다
+- 조달 스크립트는 없다. `scripts/gen-cues.py` 와 달리 한 번 받으면 끝인 파일이다
 
 로드 실패 시 시스템 폰트로 폴백하고 앱을 차단하지 않는다.
 
@@ -337,8 +344,9 @@ Setup 10번의 `카운트 방식` ROUNDS/REPS 선택이 이 라벨을 결정한�
 `expo-audio`의 `createAudioPlayer`로 앱 시작 시 플레이어 3개를 만들어 두고,
 발화할 때 `seekTo(0)` 후 `play()`. 훅이 아닌 함수라 서비스 레이어에 둘 수 있다.
 
-음원은 짧은 합성 톤을 생성해 번들한다 (라이선스 문제 없음, 파일 크기 작음):
-countdown은 짧은 틱, workStart는 높은 2연음, restStart는 낮은 단음.
+음원은 `scripts/gen-cues.py` 가 합성한다 (라이선스 문제 없음, 합계 48KB):
+countdown 은 1000Hz 55ms 틱, workStart 는 1175→1568Hz 상승 2연음,
+restStart 는 698Hz 230ms 단음. 톤을 바꾸려면 그 스크립트를 고치고 다시 돌린다.
 
 진동은 `expo-haptics`. 큐 설정과 별개로 `vibration` 스위치가 전체를 끈다.
 
@@ -348,7 +356,7 @@ countdown은 짧은 틱, workStart는 높은 2연음, restStart는 낮은 단음
 
 ### 엔진 (jest, 클럭 주입)
 
-- `compile` — 4모드 세그먼트 리스트. 타바타 마지막 `rest` 생략. cap 없는 For Time의 `durationMs: null`
+- `compile` — 4모드 세그먼트 리스트. 타바타 총 길이 = 라운드 × (work + rest). cap 없는 For Time의 `durationMs: null`
 - `derive` — 경계 정확히 그 ms, 경계 −1ms / +1ms
 - 일시정지 중 파생값 고정, 재개 후 연속성
 - **백그라운드 점프** — 5분을 건너뛰고 올바른 세그먼트에 착지
