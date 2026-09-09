@@ -1,15 +1,12 @@
 import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { BackHandler, StyleSheet, Text, View } from 'react-native';
+import { BackHandler } from 'react-native';
 
-import { AppHeader } from '@/components/AppHeader';
-import { CTAButton } from '@/components/CTAButton';
 import { Dialog } from '@/components/Dialog';
-import { PauseButton } from '@/components/PauseButton';
-import { RoundDots } from '@/components/RoundDots';
+import { PausedOverlay } from '@/components/PausedOverlay';
 import { ScreenFrame } from '@/components/ScreenFrame';
-import { TallyCard } from '@/components/TallyCard';
-import { ModeBar, SportsLabel, TimerNumber } from '@/components/TimerDisplay';
+import { PrepLayout, RunningLayout } from '@/components/TimerLayouts';
+import { TimerSlot } from '@/components/TimerSlot';
 import { MODE_IDS } from '@/core/config/defaults';
 import { totalMsOf } from '@/core/config/totals';
 import { CueName } from '@/core/timer/cues';
@@ -18,13 +15,11 @@ import { present, TimerView } from '@/core/timer/present';
 import { ModeConfig, ModeId, PREP_MS, TimerState } from '@/core/timer/types';
 import { useIntervalTimer } from '@/hooks/useIntervalTimer';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
+import { useAllowRotation, useOrientation } from '@/hooks/useOrientation';
 import { useT } from '@/i18n/useT';
 import { playCue, tapFeedback } from '@/services/cues';
 import { usePresets } from '@/store/presets';
 import { useSettings } from '@/store/settings';
-import { type } from '@/theme/fonts';
-import { color, space } from '@/theme/tokens';
-import { PausedOverlay } from '@/components/PausedOverlay';
 
 type DialogKind = 'reset' | 'end' | null;
 
@@ -45,6 +40,12 @@ function Timer({ mode }: { mode: ModeId }) {
 
   const settings = useSettings();
   useKeepAwake(settings.keepAwake);
+
+  // 폰을 눕혀 두고 멀리서 보는 화면이라 회전은 여기서만 열린다.
+  // AndroidManifest 의 configChanges 에 orientation 이 있어 액티비티가 재생성되지
+  // 않으므로, 회전해도 앵커가 살아 있고 타이머는 끊기지 않는다.
+  useAllowRotation();
+  const dims = useOrientation();
 
   const [dialog, setDialog] = useState<DialogKind>(null);
   const [tally, setTally] = useState(0);
@@ -105,10 +106,13 @@ function Timer({ mode }: { mode: ModeId }) {
     return () => sub.remove();
   }, [dialog, paused, pause]);
 
-  const endWorkout = () => {
-    setDialog(null);
-    router.replace('/');
-  };
+  const onTally = useCallback(
+    (delta: 1 | -1) => {
+      setTally((n) => Math.max(0, n + delta));
+      tapFeedback(settings.vibration);
+    },
+    [settings.vibration],
+  );
 
   return (
     <ScreenFrame
@@ -120,6 +124,7 @@ function Timer({ mode }: { mode: ModeId }) {
           {paused && !dialog && (
             <PausedOverlay
               summary={pausedSummary(view, state)}
+              landscape={dims.landscape}
               onResume={resume}
               onReset={() => setDialog('reset')}
               onEnd={() => setDialog('end')}
@@ -130,6 +135,7 @@ function Timer({ mode }: { mode: ModeId }) {
             <Dialog
               title="RESET TIMER?"
               body={t.resetBody}
+              landscape={dims.landscape}
               primaryLabel="RESET"
               primaryVariant="rest"
               onPrimary={() => {
@@ -147,81 +153,39 @@ function Timer({ mode }: { mode: ModeId }) {
             <Dialog
               title="END WORKOUT?"
               body={t.endBody}
+              landscape={dims.landscape}
               primaryLabel="KEEP GOING"
               onPrimary={() => setDialog(null)}
               secondaryLabel="END"
-              onSecondary={endWorkout}
+              onSecondary={() => {
+                setDialog(null);
+                router.replace('/');
+              }}
             />
           )}
         </>
       }
     >
       {view.layout === 'prep' ? (
-        <>
-          <AppHeader />
-          <View style={styles.prepBody}>
-            <TimerNumber text={view.timerText} accent="prep" size={210} />
-            <ModeBar label={view.modeLabel} accent="prep" />
-          </View>
-          <Text style={[type.sports(22, 0.26), styles.prepFooter]}>
-            {view.footerLabel}
-          </Text>
-        </>
+        <PrepLayout view={view} dims={dims} />
       ) : (
-        <>
-          <AppHeader />
-          <View style={styles.runningBody}>
-            <SportsLabel text={view.sportsLabel} />
-            <TimerNumber text={view.timerText} accent={view.accent} />
-
-            <View style={styles.modeBarWrap}>
-              <ModeBar label={view.modeLabel} accent={view.accent} />
-            </View>
-
-            <View style={styles.slot}>
-              {view.slot === 'dots' && (
-                <RoundDots
-                  total={view.roundTotal}
-                  current={view.roundCurrent}
-                  accent={view.accent}
-                />
-              )}
-              {view.slot === 'tally' && (
-                <TallyCard
-                  label={view.tallyKind === 'reps' ? 'REPS' : 'ROUNDS'}
-                  count={tally}
-                  onIncrement={() => {
-                    setTally((n) => n + 1);
-                    tapFeedback(settings.vibration);
-                  }}
-                  onDecrement={() => {
-                    setTally((n) => Math.max(0, n - 1));
-                    tapFeedback(settings.vibration);
-                  }}
-                />
-              )}
-              {view.slot === 'finish' && (
-                // 채운 라임으로 두면 바로 위 모드바와 같은 덩어리로 보이고,
-                // 표시일 뿐인 모드바가 버튼처럼 읽힌다. 디자인의 색 언어에서
-                // 운동을 벗어나는 동작(RESET · CANCEL)은 외곽선이다.
-                <CTAButton
-                  label="FINISH"
-                  onPress={finish}
-                  variant="outline"
-                  fontSize={34}
-                />
-              )}
-            </View>
-          </View>
-
-          <View style={styles.pauseWrap}>
-            <PauseButton
-              onPause={pause}
-              onTap={() => tapFeedback(settings.vibration)}
-              hint={t.holdToPause}
+        <RunningLayout
+          view={view}
+          dims={dims}
+          hint={t.holdToPause}
+          onPause={pause}
+          onTap={() => tapFeedback(settings.vibration)}
+          slot={
+            <TimerSlot
+              view={view}
+              accent={view.accent}
+              tally={tally}
+              onTally={onTally}
+              onFinish={finish}
+              landscape={dims.landscape}
             />
-          </View>
-        </>
+          }
+        />
       )}
     </ScreenFrame>
   );
@@ -253,29 +217,3 @@ function pausedSummary(view: TimerView, state: TimerState): string {
 
   return `${head} · ${time}`;
 }
-
-const styles = StyleSheet.create({
-  prepBody: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: space.xl,
-    alignSelf: 'stretch',
-  },
-  prepFooter: {
-    textAlign: 'center',
-    color: color.muted,
-  },
-  runningBody: {
-    marginTop: space.xxxl,
-  },
-  modeBarWrap: {
-    marginTop: 22,
-  },
-  slot: {
-    marginTop: 44,
-  },
-  pauseWrap: {
-    marginTop: 'auto',
-  },
-});

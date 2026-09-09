@@ -6,6 +6,8 @@ import { color, radius } from '../theme/tokens';
 type Props = {
   label: string;
   count: number;
+  /** 세로 96 · 가로 84 (하단 한 줄에 들어가야 한다) */
+  height?: number;
   onIncrement: () => void;
   onDecrement: () => void;
 };
@@ -20,7 +22,13 @@ type Props = {
  * 카드 전체가 탭 타겟이다 — 운동 중에 작은 + 버튼을 조준할 수는 없다.
  * 잘못 눌렀을 때는 길게 눌러 되돌린다.
  */
-export function TallyCard({ label, count, onIncrement, onDecrement }: Props) {
+export function TallyCard({
+  label,
+  count,
+  onIncrement,
+  onDecrement,
+  height = 96,
+}: Props) {
   return (
     <Pressable
       onPress={onIncrement}
@@ -28,7 +36,10 @@ export function TallyCard({ label, count, onIncrement, onDecrement }: Props) {
       accessibilityRole="button"
       accessibilityLabel={`${label} ${count}`}
       accessibilityHint="tap to add, hold to subtract"
-      style={({ pressed }) => [styles.card, { opacity: pressed ? 0.75 : 1 }]}
+      style={({ pressed }) => [
+        styles.card,
+        { height, opacity: pressed ? 0.75 : 1 },
+      ]}
     >
       <View style={styles.labels}>
         <Text style={type.meta(20, 0.22)}>{label}</Text>
@@ -43,7 +54,6 @@ export function TallyCard({ label, count, onIncrement, onDecrement }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    height: 96,
     borderRadius: radius.control,
     backgroundColor: color.surface,
     borderWidth: 1,

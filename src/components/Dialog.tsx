@@ -14,6 +14,7 @@ type Props = {
   primaryVariant?: 'work' | 'rest';
   secondaryLabel: string;
   onSecondary: () => void;
+  landscape?: boolean;
 };
 
 /**
@@ -30,30 +31,38 @@ export function Dialog({
   primaryVariant = 'work',
   secondaryLabel,
   onSecondary,
+  landscape = false,
 }: Props) {
   return (
     <View style={styles.scrim}>
-      <View style={styles.card}>
-        <Text style={[type.mode(46), styles.title]}>{title}</Text>
+      <View style={[styles.card, landscape && styles.cardLandscape]}>
+        <Text style={[type.mode(landscape ? 36 : 46), styles.title]}>
+          {title}
+        </Text>
         <Text style={[type.ko(16, 400), styles.body]}>{body}</Text>
         <View style={styles.divider} />
-        <View style={styles.actions}>
-          <CTAButton
-            label={primaryLabel}
-            onPress={onPrimary}
-            variant={primaryVariant}
-            height={72}
-            fontSize={30}
-            style={styles.radiusRow}
-          />
-          <CTAButton
-            label={secondaryLabel}
-            onPress={onSecondary}
-            variant="outline"
-            height={64}
-            fontSize={26}
-            style={styles.radiusRow}
-          />
+        {/* 가로에서는 세로로 쌓을 높이가 없다. 좌우로 편다. */}
+        <View style={landscape ? styles.actionsRow : styles.actions}>
+          <View style={landscape ? styles.half : undefined}>
+            <CTAButton
+              label={primaryLabel}
+              onPress={onPrimary}
+              variant={primaryVariant}
+              height={landscape ? 64 : 72}
+              fontSize={landscape ? 26 : 30}
+              style={styles.radiusRow}
+            />
+          </View>
+          <View style={landscape ? styles.half : undefined}>
+            <CTAButton
+              label={secondaryLabel}
+              onPress={onSecondary}
+              variant="outline"
+              height={64}
+              fontSize={26}
+              style={styles.radiusRow}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -78,6 +87,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 26,
     paddingBottom: 26,
   },
+  cardLandscape: {
+    maxWidth: 560,
+    paddingTop: 26,
+    paddingBottom: 20,
+  },
   title: {
     lineHeight: 46 * 1.05,
   },
@@ -94,6 +108,13 @@ const styles = StyleSheet.create({
   },
   actions: {
     gap: 12,
+  },
+  actionsRow: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  half: {
+    flex: 1,
   },
   radiusRow: {
     borderRadius: radius.row,

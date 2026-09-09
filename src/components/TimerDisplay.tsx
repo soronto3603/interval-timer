@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { type } from '../theme/fonts';
-import { scaleFont } from '../theme/scale';
 import { color, radius, touch } from '../theme/tokens';
 
 /** 세그먼트 상태별 강조색. 디자인의 STATE 토큰. */
@@ -35,29 +34,39 @@ export const ACCENT: Record<
 };
 
 /** 상단 스포츠 라벨 — `ROUND 3 / 8` · `AMRAP · 12:00` · `COUNT UP` */
-export function SportsLabel({ text }: { text: string }) {
+export function SportsLabel({
+  text,
+  align = 'center',
+}: {
+  text: string;
+  /** 가로에서는 로고와 좌우로 나뉘어 앉는다 */
+  align?: 'center' | 'left';
+}) {
   return (
-    <Text style={[type.sports(26), styles.centered]} numberOfLines={1}>
+    <Text
+      style={[type.sports(align === 'left' ? 22 : 26), { textAlign: align }]}
+      numberOfLines={1}
+    >
       {text}
     </Text>
   );
 }
 
 /**
- * 큰 타이머 숫자. 디자인은 Anton 150 이지만 그 값은 390px 폭 기준이라
- * 좁은 기기에서는 넘친다 (scaleFont).
+ * 큰 타이머 숫자. 크기는 timerFontSize 가 방향과 화면 치수를 보고 정한다 —
+ * 세로에서는 폭이, 가로에서는 높이가 제약이라 한 축만 봐서는 안 된다.
  */
 export function TimerNumber({
   text,
   accent,
-  size = 150,
+  fontSize,
 }: {
   text: string;
   accent: Accent;
-  size?: number;
+  /** timerFontSize 가 계산한 값. 방향과 화면 치수에 따라 달라진다 */
+  fontSize: number;
 }) {
   const { fill, glow, glowRadius } = ACCENT[accent];
-  const fontSize = scaleFont(size);
 
   return (
     <Text
@@ -81,20 +90,33 @@ export function TimerNumber({
   );
 }
 
-/** WORK · REST · READY 모드바 (height 92) */
+/**
+ * WORK · REST · READY 모드바.
+ *
+ * 세로에서는 전폭 92 로 화면의 주인공 중 하나지만, 가로에서는 411dp 높이를
+ * 숫자에 내줘야 해서 가운데 낮은 띠(44)로 줄어든다.
+ */
 export function ModeBar({
   label,
   accent,
+  compact = false,
 }: {
   label: string;
   accent: Accent;
+  compact?: boolean;
 }) {
   const { fill, on } = ACCENT[accent];
 
   return (
-    <View style={[styles.modeBar, { backgroundColor: fill }]}>
+    <View
+      style={[
+        styles.modeBar,
+        { backgroundColor: fill },
+        compact && styles.modeBarCompact,
+      ]}
+    >
       <Text
-        style={[type.mode(scaleFont(56), 0.03), { color: on }]}
+        style={[type.mode(compact ? 30 : 56, 0.03), { color: on }]}
         numberOfLines={1}
         allowFontScaling={false}
       >
@@ -113,5 +135,10 @@ const styles = StyleSheet.create({
     borderRadius: radius.control,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  modeBarCompact: {
+    height: 44,
+    paddingHorizontal: 28,
+    alignSelf: 'center',
   },
 });

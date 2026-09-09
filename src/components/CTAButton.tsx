@@ -10,6 +10,7 @@ type Props = {
   onPress: () => void;
   variant?: Variant;
   /** 디자인의 touch 토큰: CTA 88 · row 72 · 다이얼로그 2차 64 */
+  /** 생략하면 디자인의 CTA 높이 88 */
   height?: number;
   fontSize?: number;
   style?: ViewStyle;

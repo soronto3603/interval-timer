@@ -1,5 +1,3 @@
-import { Dimensions } from 'react-native';
-
 /** 디자인 캔버스의 프레임 폭 (390 × 844). */
 export const DESIGN_WIDTH = 390;
 
@@ -21,10 +19,6 @@ export function scaleBy(px: number, width: number): number {
   return Math.round(px * scaleFactor(width));
 }
 
-/**
- * 디스플레이 타입(Anton 타이머·모드 워드)에만 쓴다.
- * 본문·라벨은 디자인 값을 그대로 써야 행 높이가 흐트러지지 않는다.
- */
-export function scaleFont(px: number): number {
-  return scaleBy(px, Dimensions.get('window').width);
-}
+// scaleFont 는 없앴다. Dimensions.get() 은 회전에 반응하지 않아 가로에서 세로 값이
+// 그대로 남았고, 폭만 보는 배율이라 높이가 제약인 가로에서는 반대로 동작했다.
+// 지금은 timerFont.ts 의 timerFontSize 가 양쪽 축을 모두 본다.

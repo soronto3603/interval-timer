@@ -26,7 +26,7 @@ export const em = (size: number, value: number) => size * value;
 
 /**
  * 디자인의 TYPE 토큰. 크기가 화면 폭에 따라 변하는 디스플레이 타입은
- * 여기서 fontSize 를 정하지 않고 쓰는 쪽에서 scaleFont 로 넣는다.
+ * 여기서 fontSize 를 정하지 않고 쓰는 쪽에서 timerFontSize 로 넣는다.
  */
 export const type = {
   /** display/timer — Anton 150 / lh 1.0 / +0.01em */

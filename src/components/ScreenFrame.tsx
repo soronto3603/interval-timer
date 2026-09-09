@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { StyleSheet, View, ViewStyle } from 'react-native';
+import { useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { color, layout } from '../theme/tokens';
@@ -37,6 +38,8 @@ export function ScreenFrame({
   style,
 }: Props) {
   const insets = useSafeAreaInsets();
+  const { width, height } = useWindowDimensions();
+  const landscape = width > height;
 
   return (
     <View style={styles.root}>
@@ -45,8 +48,14 @@ export function ScreenFrame({
         style={[
           styles.content,
           {
-            paddingTop: insets.top + layout.screenTop,
-            paddingBottom: Math.max(insets.bottom, layout.safeBottom),
+            // 가로에서는 노치가 옆으로 온다. 상단 여백 28 은 411dp 높이에 과하다.
+            paddingTop: insets.top + (landscape ? 12 : layout.screenTop),
+            paddingBottom: Math.max(
+              insets.bottom,
+              landscape ? 12 : layout.safeBottom,
+            ),
+            paddingLeft: layout.screenX + insets.left,
+            paddingRight: layout.screenX + insets.right,
             opacity: contentOpacity,
           },
           style,
@@ -66,6 +75,5 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: layout.screenX,
   },
 });

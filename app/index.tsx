@@ -8,6 +8,7 @@ import { ScreenFrame } from '@/components/ScreenFrame';
 import { MODE_IDS, MODE_LABEL } from '@/core/config/defaults';
 import { describeConfig } from '@/core/config/describe';
 import { ModeId } from '@/core/timer/types';
+import { useLockPortrait } from '@/hooks/useOrientation';
 import { useT } from '@/i18n/useT';
 import { usePresets } from '@/store/presets';
 import { type } from '@/theme/fonts';
@@ -16,6 +17,10 @@ import { PresetSheet } from '@/components/PresetSheet';
 
 export default function HomeScreen() {
   const t = useT();
+
+  // 타이머에서 가로로 돌아왔더라도 여기서는 세로로 되돌린다.
+  // Setup · Settings 는 Home 을 거쳐야 갈 수 있어 자연히 세로가 된다.
+  useLockPortrait();
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const presets = usePresets((s) => s.presets);

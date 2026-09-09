@@ -142,14 +142,23 @@ export function SummaryRow({
   value,
   accent = false,
   last = false,
+  compact = false,
 }: {
   label: string;
   value: string;
   accent?: boolean;
   last?: boolean;
+  /** 가로에서는 4행이 스크롤 없이 들어가야 한다 */
+  compact?: boolean;
 }) {
   return (
-    <View style={[styles.summaryRow, last && styles.settingRowLast]}>
+    <View
+      style={[
+        styles.summaryRow,
+        compact && styles.summaryRowCompact,
+        last && styles.settingRowLast,
+      ]}
+    >
       <Text style={[type.ko(18, 600), { color: color.mutedStrong }]}>
         {label}
       </Text>
@@ -209,6 +218,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 22,
+  },
+  summaryRowCompact: {
+    paddingVertical: 12,
   },
   summaryRow: {
     flexDirection: 'row',
