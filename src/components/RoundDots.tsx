@@ -36,30 +36,31 @@ export function RoundDots({ total, current, accent }: Props) {
     );
   }
 
+  const ring = ACCENT[accent].ring;
+
   return (
     <View style={styles.dots} testID="round-dots">
       {Array.from({ length: total }, (_, i) => {
         const done = i < current;
         const active = i === current;
         return (
+          // 현재 라운드에만 링을 씌워 진행한 라운드와 구분한다.
+          // 디자인은 `box-shadow: 0 0 0 4px` — 흐림 없는 4px 링이라, 그림자가
+          // 아니라 한 겹 감싼 원으로 만든다 (Android 그림자는 흐림이 섞인다).
           <View
             key={i}
             style={[
-              styles.dot,
-              {
-                backgroundColor: done || active ? fill : color.dotIdle,
-                // 현재 라운드에만 발광 링. 진행한 라운드와 구분된다
-                ...(active
-                  ? {
-                      shadowColor: fill,
-                      shadowOpacity: 0.2,
-                      shadowRadius: 4,
-                      elevation: 4,
-                    }
-                  : null),
-              },
+              styles.ring,
+              active && { backgroundColor: ring },
             ]}
-          />
+          >
+            <View
+              style={[
+                styles.dot,
+                { backgroundColor: done || active ? fill : color.dotIdle },
+              ]}
+            />
+          </View>
         );
       })}
     </View>
@@ -70,7 +71,15 @@ const styles = StyleSheet.create({
   dots: {
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 12,
+    // 링이 도트 밖으로 4px 나가므로 디자인의 gap 12 에서 그만큼 뺀다
+    gap: 12 - 4 * 2,
+  },
+  ring: {
+    width: 18 + 4 * 2,
+    height: 18 + 4 * 2,
+    borderRadius: (18 + 4 * 2) / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   dot: {
     width: 18,

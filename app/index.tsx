@@ -12,7 +12,7 @@ import { useT } from '@/i18n/useT';
 import { usePresets } from '@/store/presets';
 import { type } from '@/theme/fonts';
 import { color, radius, space } from '@/theme/tokens';
-import { PresetSheet } from './_components/PresetSheet';
+import { PresetSheet } from '@/components/PresetSheet';
 
 export default function HomeScreen() {
   const t = useT();
@@ -25,7 +25,11 @@ export default function HomeScreen() {
   const recent = lastUsedMode ? presets[lastUsedMode] : null;
 
   return (
-    <ScreenFrame>
+    <ScreenFrame
+      overlay={
+        sheetOpen ? <PresetSheet onClose={() => setSheetOpen(false)} /> : null
+      }
+    >
       <AppHeader onMenu={() => router.push('/settings')} />
 
       <ScrollView
@@ -105,8 +109,6 @@ export default function HomeScreen() {
           </View>
         )}
       </View>
-
-      {sheetOpen && <PresetSheet onClose={() => setSheetOpen(false)} />}
     </ScreenFrame>
   );
 }

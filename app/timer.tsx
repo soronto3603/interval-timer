@@ -11,10 +11,11 @@ import { ScreenFrame } from '@/components/ScreenFrame';
 import { TallyCard } from '@/components/TallyCard';
 import { ModeBar, SportsLabel, TimerNumber } from '@/components/TimerDisplay';
 import { MODE_IDS } from '@/core/config/defaults';
+import { totalMsOf } from '@/core/config/totals';
 import { CueName } from '@/core/timer/cues';
 import { formatCountdown } from '@/core/timer/format';
 import { present, TimerView } from '@/core/timer/present';
-import { ModeId, PREP_MS, TimerState } from '@/core/timer/types';
+import { ModeConfig, ModeId, PREP_MS, TimerState } from '@/core/timer/types';
 import { useIntervalTimer } from '@/hooks/useIntervalTimer';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useT } from '@/i18n/useT';
@@ -23,7 +24,7 @@ import { usePresets } from '@/store/presets';
 import { useSettings } from '@/store/settings';
 import { type } from '@/theme/fonts';
 import { color, space } from '@/theme/tokens';
-import { PausedOverlay } from './_components/PausedOverlay';
+import { PausedOverlay } from '@/components/PausedOverlay';
 
 type DialogKind = 'reset' | 'end' | null;
 
@@ -71,8 +72,7 @@ function Timer({ mode }: { mode: ModeId }) {
         finishedAt: Date.now(),
         roundsDone: state.segment.roundTotal,
         tally: config.mode === 'amrap' ? tallyRef.current : undefined,
-        // prep 은 운동이 아니다
-        totalMs: Math.max(0, state.totalElapsedMs - PREP_MS),
+        totalMs: recordedTotalMs(state, config),
       });
       router.replace(`/complete?mode=${mode}`);
     },
@@ -111,7 +111,51 @@ function Timer({ mode }: { mode: ModeId }) {
   };
 
   return (
-    <ScreenFrame dotted>
+    <ScreenFrame
+      dotted
+      // 디자인 07 · 08 · 09번의 본문 opacity 0.28
+      contentOpacity={paused || dialog ? 0.28 : undefined}
+      overlay={
+        <>
+          {paused && !dialog && (
+            <PausedOverlay
+              summary={pausedSummary(view, state)}
+              onResume={resume}
+              onReset={() => setDialog('reset')}
+              onEnd={() => setDialog('end')}
+            />
+          )}
+
+          {dialog === 'reset' && (
+            <Dialog
+              title="RESET TIMER?"
+              body={t.resetBody}
+              primaryLabel="RESET"
+              primaryVariant="rest"
+              onPrimary={() => {
+                setDialog(null);
+                setTally(0);
+                reset();
+              }}
+              secondaryLabel="CANCEL"
+              onSecondary={() => setDialog(null)}
+            />
+          )}
+
+          {dialog === 'end' && (
+            // 강조 버튼이 `계속하기` 다. 파괴적 동작은 2차 버튼 (디자인 09번)
+            <Dialog
+              title="END WORKOUT?"
+              body={t.endBody}
+              primaryLabel="KEEP GOING"
+              onPrimary={() => setDialog(null)}
+              secondaryLabel="END"
+              onSecondary={endWorkout}
+            />
+          )}
+        </>
+      }
+    >
       {view.layout === 'prep' ? (
         <>
           <AppHeader />
@@ -157,55 +201,45 @@ function Timer({ mode }: { mode: ModeId }) {
                 />
               )}
               {view.slot === 'finish' && (
-                <CTAButton label="FINISH" onPress={finish} />
+                // 채운 라임으로 두면 바로 위 모드바와 같은 덩어리로 보이고,
+                // 표시일 뿐인 모드바가 버튼처럼 읽힌다. 디자인의 색 언어에서
+                // 운동을 벗어나는 동작(RESET · CANCEL)은 외곽선이다.
+                <CTAButton
+                  label="FINISH"
+                  onPress={finish}
+                  variant="outline"
+                  fontSize={34}
+                />
               )}
             </View>
           </View>
 
           <View style={styles.pauseWrap}>
-            <PauseButton onPress={pause} hint={t.holdToPause} />
+            <PauseButton
+              onPause={pause}
+              onTap={() => tapFeedback(settings.vibration)}
+              hint={t.holdToPause}
+            />
           </View>
         </>
       )}
-
-      {paused && !dialog && (
-        <PausedOverlay
-          summary={pausedSummary(view, state)}
-          onResume={resume}
-          onReset={() => setDialog('reset')}
-          onEnd={() => setDialog('end')}
-        />
-      )}
-
-      {dialog === 'reset' && (
-        <Dialog
-          title="RESET TIMER?"
-          body={t.resetBody}
-          primaryLabel="RESET"
-          primaryVariant="rest"
-          onPrimary={() => {
-            setDialog(null);
-            setTally(0);
-            reset();
-          }}
-          secondaryLabel="CANCEL"
-          onSecondary={() => setDialog(null)}
-        />
-      )}
-
-      {dialog === 'end' && (
-        // 강조 버튼이 `계속하기` 다. 파괴적 동작은 2차 버튼 (디자인 09번)
-        <Dialog
-          title="END WORKOUT?"
-          body={t.endBody}
-          primaryLabel="KEEP GOING"
-          onPrimary={() => setDialog(null)}
-          secondaryLabel="END"
-          onSecondary={endWorkout}
-        />
-      )}
     </ScreenFrame>
   );
+}
+
+/**
+ * 기록에 남길 총 시간. prep 은 운동이 아니므로 뺀다.
+ *
+ * 끝까지 돈 운동은 실제 경과가 아니라 **계획된** 길이를 쓴다. 틱이 100ms 간격이라
+ * 완료 감지가 그만큼 늦고, 그 지연이 기록에 섞이면 8라운드 타바타가 04:00 이
+ * 아니라 04:01 로 남는다. 중간에 FINISH 로 끝낸 운동만 실제 경과를 쓴다.
+ */
+function recordedTotalMs(state: TimerState, config: ModeConfig): number {
+  if (state.phase === 'complete') {
+    const planned = totalMsOf(config);
+    if (planned !== null) return planned;
+  }
+  return Math.max(0, state.totalElapsedMs - PREP_MS);
 }
 
 /**

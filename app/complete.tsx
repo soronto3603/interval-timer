@@ -7,7 +7,7 @@ import { CTAButton } from '@/components/CTAButton';
 import { SummaryRow } from '@/components/rows';
 import { ScreenFrame } from '@/components/ScreenFrame';
 import { MODE_LABEL } from '@/core/config/defaults';
-import { formatCountdown } from '@/core/timer/format';
+import { formatCountdown, formatCountup } from '@/core/timer/format';
 import { useT } from '@/i18n/useT';
 import { usePresets, WorkoutSummary } from '@/store/presets';
 import { type } from '@/theme/fonts';
@@ -62,7 +62,8 @@ function rowsFor(summary: WorkoutSummary, t: ReturnType<typeof useT>) {
     <SummaryRow
       key="total"
       label={t.totalTime}
-      value={formatCountdown(summary.totalMs)}
+      // 경과 시간이므로 내림이다. 올림으로 찍으면 30.05초가 00:31 이 된다
+      value={formatCountup(summary.totalMs)}
       accent
       last
     />

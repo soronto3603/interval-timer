@@ -46,6 +46,17 @@ export const color = {
   /** For Time 대기 상태의 큰 숫자 */
   placeholder: '#22261F',
 
+  /**
+   * 발광. 디자인의 text-shadow / box-shadow 알파를 그대로 옮긴 것 —
+   * 원색으로 넣으면 숫자 윤곽이 뭉개진다.
+   */
+  workGlow: 'rgba(184,255,46,0.22)',
+  restGlow: 'rgba(255,107,26,0.22)',
+  prepGlow: 'rgba(46,141,255,0.28)',
+  workRing: 'rgba(184,255,46,0.18)',
+  restRing: 'rgba(255,107,26,0.2)',
+  prepRing: 'rgba(46,141,255,0.2)',
+
   /** 오버레이 */
   scrim: 'rgba(6,7,6,0.93)',
   scrimDialog: 'rgba(6,7,6,0.9)',

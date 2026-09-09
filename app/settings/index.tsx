@@ -16,7 +16,7 @@ export default function SettingsScreen() {
 
   return (
     <ScreenFrame>
-      <AppHeader onClose={() => router.dismissTo('/')} />
+      <AppHeader onClose={() => router.back()} />
 
       <Text style={[type.mode(56), styles.heading]}>SETTINGS</Text>
       <Text style={[type.ko(20, 600), styles.sub]}>{t.settings}</Text>

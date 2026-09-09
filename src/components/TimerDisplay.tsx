@@ -7,10 +7,31 @@ import { color, radius, touch } from '../theme/tokens';
 /** 세그먼트 상태별 강조색. 디자인의 STATE 토큰. */
 export type Accent = 'work' | 'rest' | 'prep';
 
-export const ACCENT: Record<Accent, { fill: string; on: string }> = {
-  work: { fill: color.work, on: color.onWork },
-  rest: { fill: color.rest, on: color.onRest },
-  prep: { fill: color.prep, on: color.onPrep },
+export const ACCENT: Record<
+  Accent,
+  { fill: string; on: string; glow: string; glowRadius: number; ring: string }
+> = {
+  work: {
+    fill: color.work,
+    on: color.onWork,
+    glow: color.workGlow,
+    glowRadius: 60,
+    ring: color.workRing,
+  },
+  rest: {
+    fill: color.rest,
+    on: color.onRest,
+    glow: color.restGlow,
+    glowRadius: 60,
+    ring: color.restRing,
+  },
+  prep: {
+    fill: color.prep,
+    on: color.onPrep,
+    glow: color.prepGlow,
+    glowRadius: 70,
+    ring: color.prepRing,
+  },
 };
 
 /** 상단 스포츠 라벨 — `ROUND 3 / 8` · `AMRAP · 12:00` · `COUNT UP` */
@@ -35,7 +56,7 @@ export function TimerNumber({
   accent: Accent;
   size?: number;
 }) {
-  const fill = ACCENT[accent].fill;
+  const { fill, glow, glowRadius } = ACCENT[accent];
   const fontSize = scaleFont(size);
 
   return (
@@ -45,9 +66,11 @@ export function TimerNumber({
         styles.centered,
         {
           color: fill,
-          textShadowColor: fill,
+          // 원색이 아니라 디자인의 알파값(0.22 / 0.28)을 쓴다.
+          // 꽉 찬 색으로 흘리면 숫자 윤곽이 발광에 먹힌다.
+          textShadowColor: glow,
           textShadowOffset: { width: 0, height: 0 },
-          textShadowRadius: 60,
+          textShadowRadius: glowRadius,
         },
       ]}
       numberOfLines={1}

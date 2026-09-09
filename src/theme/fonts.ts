@@ -52,7 +52,6 @@ export const type = {
     fontSize: size,
     letterSpacing: em(size, letter),
     color: color.inkDim,
-    textTransform: 'uppercase',
   }),
 
   /** label/meta — Barlow Condensed 600 / +0.2~0.22em */
@@ -61,7 +60,6 @@ export const type = {
     fontSize: size,
     letterSpacing: em(size, letter),
     color: color.faint,
-    textTransform: 'uppercase',
   }),
 
   /** 셰브론 · −/+ 기호. Barlow 는 기호 균형이 좋다 */

@@ -14,7 +14,7 @@ import { useT } from '@/i18n/useT';
 import { usePresets } from '@/store/presets';
 import { type } from '@/theme/fonts';
 import { color, space } from '@/theme/tokens';
-import { ChoicePair, ForTimeCap } from './_fields';
+import { ChoicePair, ForTimeCap } from '@/components/setupFields';
 
 export default function SetupScreen() {
   const params = useLocalSearchParams<{ mode: string }>();

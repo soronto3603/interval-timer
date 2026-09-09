@@ -32,9 +32,10 @@ type Options = {
 export function useIntervalTimer({ config, onCue, onComplete }: Options) {
   const segments = useMemo(() => compile(config), [config]);
 
+  // 앵커와 첫 파생값이 같은 시각을 보게 한다
   const [anchor, setAnchor] = useState<Anchor>(() => startAnchor(Date.now()));
   const [state, setState] = useState<TimerState>(() =>
-    derive(segments, startAnchor(Date.now()), Date.now()),
+    derive(segments, anchor, anchor.startedAt),
   );
 
   const anchorRef = useRef(anchor);

@@ -30,7 +30,7 @@ export function PresetSheet({ onClose }: { onClose: () => void }) {
           { paddingBottom: Math.max(insets.bottom, layout.safeBottom) },
         ]}
       >
-        <Text style={[type.meta(15, 0.2), styles.heading]}>{t.presets}</Text>
+        <Text style={[type.ko(15, 600), styles.heading]}>{t.presets}</Text>
         <View style={styles.rows}>
           {MODE_IDS.map((mode) => (
             <Pressable

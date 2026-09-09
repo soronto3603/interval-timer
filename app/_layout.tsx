@@ -27,10 +27,10 @@ export default function RootLayout() {
     if (ready) SplashScreen.hideAsync().catch(() => {});
   }, [ready]);
 
-  // 폰트와 저장값이 준비되기 전에 그리면 레이아웃이 한 번 튄다.
-  // 스플래시가 떠 있는 동안이라 사용자는 빈 화면을 보지 않는다.
-  if (!ready) return null;
-
+  // 준비될 때까지 null 을 반환하면 안 된다. expo-router 의 딥링크 URL 해석이
+  // Promise 로 끝나면서 아직 마운트되지 않은 트리에 setState 를 하고,
+  // "state update on a component that hasn't mounted yet" 로 터진다.
+  // 그래서 화면은 계속 마운트해 두고 스플래시로 덮어만 둔다.
   return (
     <SafeAreaProvider>
       <StatusBar style="light" />

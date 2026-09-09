@@ -6,7 +6,7 @@ import { ForTimeConfig } from '@/core/timer/types';
 import { useT } from '@/i18n/useT';
 import { type } from '@/theme/fonts';
 import { color, radius, space } from '@/theme/tokens';
-import { Stepper } from '@/components/Stepper';
+import { Stepper } from './Stepper';
 
 /** 디자인 10번의 ROUNDS / REPS 2택 */
 export function ChoicePair<T extends string>({
