@@ -10,3 +10,9 @@ ios/
 
 # 22MB Claude Design 번들 원본. 추출본 design/pulse-box-canvas.html 을 추적한다
 pulse-box-ui.html
+
+# 릴리스 서명 — 절대 커밋하지 않는다.
+# 이 키를 잃으면 같은 패키지명으로 업데이트를 올릴 수 없다 (Play App Signing 등록 전이면 특히).
+*.keystore
+!android/app/debug.keystore
+keystore.properties
