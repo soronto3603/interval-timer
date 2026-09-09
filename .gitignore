@@ -16,3 +16,6 @@ pulse-box-ui.html
 *.keystore
 !android/app/debug.keystore
 keystore.properties
+
+# 릴리스 산출물. android/ 는 prebuild --clean 이 지우므로 여기로 복사해 둔다.
+release/
