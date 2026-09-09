@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from '@/components/AppHeader';
 import { CTAButton } from '@/components/CTAButton';
 import { type } from '@/theme/fonts';
-import { color, layout } from '@/theme/tokens';
+import { color, layout, radius } from '@/theme/tokens';
 
 type Props = {
   /** `ROUND 3 / 8 · 00:17` */
@@ -75,7 +75,7 @@ export function PausedOverlay({
             { opacity: pressed ? 0.6 : 1 },
           ]}
         >
-          <Text style={[type.sports(landscape ? 18 : 22, 0.2), styles.endLabel]}>
+          <Text style={[type.sports(landscape ? 20 : 24, 0.2), styles.endLabel]}>
             END WORKOUT
           </Text>
         </Pressable>
@@ -115,16 +115,26 @@ const styles = StyleSheet.create({
   },
   endLandscape: {
     height: 72,
-    paddingHorizontal: 12,
+    paddingHorizontal: 16,
+    borderWidth: 1.5,
+    borderColor: color.lineButton,
+    borderRadius: radius.control,
+    backgroundColor: color.surfaceButton,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  // 새 디자인에서 맨 텍스트가 아니라 테두리 버튼이 됐다.
+  // 예전에는 라벨처럼 보여 누를 수 있다는 것이 읽히지 않았다.
   end: {
-    height: 60,
+    height: 64,
+    borderWidth: 1.5,
+    borderColor: color.lineButton,
+    borderRadius: radius.control,
+    backgroundColor: color.surfaceButton,
     alignItems: 'center',
     justifyContent: 'center',
   },
   endLabel: {
-    color: color.faintAlt,
+    color: color.controlBright,
   },
 });

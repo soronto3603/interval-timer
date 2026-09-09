@@ -16,6 +16,9 @@ export const color = {
   line: '#202320',
   /** 외곽선 버튼 · 비활성 테두리 */
   lineStrong: '#2E332E',
+  /** 디자인 07번 END WORKOUT 버튼 — lineStrong 보다 한 단계 밝다 */
+  lineButton: '#3A3F3A',
+  surfaceButton: '#151715',
   /** 미완료 라운드 도트 */
   dotIdle: '#2B2E2B',
 
@@ -43,6 +46,8 @@ export const color = {
   ghost: '#4A504A',
   /** 스테퍼 −/+ 기호 */
   control: '#C9CFC7',
+  /** 디자인 07번 END WORKOUT 글자 */
+  controlBright: '#D6DBD4',
   /** For Time 대기 상태의 큰 숫자 */
   placeholder: '#22261F',
 
