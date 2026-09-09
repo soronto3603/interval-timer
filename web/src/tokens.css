@@ -1,0 +1,96 @@
+/*
+ * PULSE BOX 디자인 토큰.
+ *
+ * 모바일 앱의 src/theme/tokens.ts 와 같은 값이다. 코드를 공유하지 않고 복사한 것 —
+ * 웹과 RN 이 의존성을 공유하면 Expo 의 node_modules 호이스팅이 깨진다. 값이
+ * 바뀌면 두 곳을 같이 고쳐야 한다는 뜻이고, 20개도 안 되는 세트라 그게 낫다.
+ *
+ * 폰트는 앱처럼 번들하지 않고 CDN 에서 받는다. 웹에서 4.5MB Pretendard 를
+ * 내려받게 할 이유가 없다.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+:root {
+  /* bg */
+  --void: #070807;
+  --screen: #0c0d0c;
+  --surface: #141614;
+  --surface-raised: #1a1d1a;
+  --line: #202320;
+  --line-strong: #2e332e;
+  --line-button: #3a3f3a;
+
+  /* state */
+  --work: #b8ff2e;
+  --on-work: #0a0b0a;
+  --rest: #ff6b1a;
+  --prep: #2e8dff;
+
+  /* text */
+  --ink: #f4f6f2;
+  --ink-dim: #e6eae4;
+  --muted: #8a918a;
+  --muted-strong: #9aa199;
+  --faint: #6e756e;
+  --ghost: #4a504a;
+
+  /* radius (앱의 row 12 · control 14 · dialog 18) */
+  --r-row: 12px;
+  --r-control: 14px;
+  --r-dialog: 18px;
+
+  /* type */
+  --display: 'Anton', Impact, sans-serif;
+  --sports: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --body: 'Pretendard Variable', Pretendard, -apple-system, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--work);
+}
+
+/* 앱의 로고. Anton 에 이탤릭이 없어 기울여 쓴다 (앱과 같은 처리) */
+.logo {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  transform: skewX(-8deg);
+  display: inline-block;
+}
+.logo em {
+  color: var(--work);
+  font-style: normal;
+}
+
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.sports {
+  font-family: var(--sports);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+}

@@ -1,0 +1,145 @@
+/* 읽기 문서. 랜딩보다 폭을 좁혀 한 줄 길이를 줄인다. */
+
+.doc {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 22px 80px;
+}
+
+.doc-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 28px;
+  margin-bottom: 8px;
+}
+
+.doc-kicker {
+  font-size: 15px;
+  margin: 26px 0 6px;
+}
+
+.doc h1 {
+  font-family: var(--display);
+  font-size: 44px;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  margin: 0;
+  font-weight: 400;
+}
+
+.doc-updated {
+  color: var(--faint);
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--work);
+  border-radius: var(--r-control);
+  padding: 22px 24px;
+  margin: 34px 0;
+}
+
+.callout h2 {
+  margin-top: 0;
+}
+
+.doc section {
+  margin: 34px 0;
+}
+
+.doc h2 {
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.doc p,
+.doc li {
+  color: var(--muted-strong);
+  font-size: 16px;
+}
+
+.doc strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.doc ul {
+  padding-left: 20px;
+}
+
+.doc li {
+  margin: 4px 0;
+}
+
+/* 좁은 화면에서 표가 페이지를 밀지 않게 자기 안에서 스크롤한다 */
+.table-scroll {
+  overflow-x: auto;
+  margin: 14px 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-row);
+}
+
+.doc table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 420px;
+}
+
+.doc th,
+.doc td {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 15px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.doc tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.doc th {
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.doc td {
+  color: var(--muted-strong);
+}
+
+.doc td:first-child {
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.doc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  margin-top: 52px;
+  font-size: 14px;
+}
+
+.doc-foot .sports {
+  font-size: 13px;
+  color: var(--ghost);
+}
+
+@media (max-width: 520px) {
+  .doc {
+    padding-top: 34px;
+  }
+  .doc h1 {
+    font-size: 34px;
+  }
+}

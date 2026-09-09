@@ -1,0 +1,30 @@
+# PULSE BOX 웹 (랜딩 + 개인정보 처리방침).
+#
+# base = "web" 이므로 모바일 앱 쪽 변경은 배포를 트리거하지 않는다.
+# 나머지 경로는 base 기준 상대 경로다.
+[build]
+  base = "web"
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Vite MPA 로 빌드하므로 /privacy/ 는 실제 파일이다. SPA 폴백을 쓰지 않는
+# 이유: Play Console 이 이 URL 을 검증하고, 그게 이 사이트의 존재 이유다.
+# 뒤에 슬래시 없이 들어와도 같은 문서를 주도록만 맞춘다.
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy/"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/screenshots/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

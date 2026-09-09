@@ -1,0 +1,244 @@
+/* 앱과 같은 다크 + 라임. 디스플레이 타입은 Anton, 본문은 Pretendard. */
+
+.nav {
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--void) 88%, transparent);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-link {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.nav-link:hover {
+  color: var(--ink);
+}
+
+/* --- hero --- */
+
+.hero {
+  background: var(--screen);
+  border-bottom: 1px solid var(--line);
+  /* 앱 타이머 화면의 점 격자 */
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 52px;
+  align-items: center;
+  padding: 72px 22px 80px;
+}
+
+.hero-kicker {
+  font-size: 15px;
+  margin: 0 0 18px;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(44px, 7vw, 76px);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  margin: 0 0 22px;
+  font-weight: 400;
+}
+
+.lime {
+  color: var(--work);
+}
+
+.lede {
+  color: var(--muted-strong);
+  font-size: 17px;
+  margin: 0 0 24px;
+  max-width: 46ch;
+}
+
+.points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+}
+
+.points li {
+  color: var(--muted-strong);
+  font-size: 16px;
+  padding-left: 22px;
+  position: relative;
+  margin: 8px 0;
+}
+
+.points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--work);
+}
+
+.badge-note {
+  font-size: 14px;
+  color: var(--ghost);
+  margin: 0;
+}
+
+.hero-shot img {
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+  border: 1px solid var(--line-strong);
+  display: block;
+}
+
+/* --- sections --- */
+
+.section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: 30px;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  margin: 0 0 26px;
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+}
+
+.mode {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  padding: 24px;
+}
+
+.mode h3 {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 400;
+  margin: 0 0 10px;
+  letter-spacing: 0.01em;
+}
+
+.mode p {
+  color: var(--muted-strong);
+  font-size: 15px;
+  margin: 0;
+}
+
+.shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.shots img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  display: block;
+}
+
+.privacy-cta .lede {
+  max-width: 60ch;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 28px;
+  background: var(--work);
+  color: var(--on-work);
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  border-radius: var(--r-control);
+  text-decoration: none;
+}
+
+.cta:hover {
+  filter: brightness(1.07);
+}
+
+/* --- footer --- */
+
+.foot {
+  padding: 34px 0;
+}
+
+.foot-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.foot .sports {
+  font-size: 13px;
+  color: var(--ghost);
+}
+
+.foot nav {
+  display: flex;
+  gap: 20px;
+}
+
+.foot nav a {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.foot nav a:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 48px;
+  }
+  /* 좁은 화면에서 스크린샷이 화면을 다 먹지 않게 */
+  .hero-shot {
+    max-width: 320px;
+  }
+  .section {
+    padding: 52px 0;
+  }
+}
+
+/* 가로 모드 스크린샷 — 폭이 넓어 단독으로 놓는다 */
+.wide-shot {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  display: block;
+  margin-top: 8px;
+}

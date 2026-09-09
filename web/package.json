@@ -1,0 +1,23 @@
+{
+  "name": "pulse-box-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "PULSE BOX 랜딩 + 개인정보 처리방침. 모바일 앱과 의존성을 공유하지 않는다.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "~7.0.2",
+    "vite": "^8.2.2"
+  }
+}
