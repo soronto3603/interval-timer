@@ -8,7 +8,7 @@ import {
   start as startAnchor,
 } from '../core/timer/anchor';
 import { compile } from '../core/timer/compile';
-import { CueName, cuesFor } from '../core/timer/cues';
+import { Cue, cuesFor } from '../core/timer/cues';
 import { derive } from '../core/timer/derive';
 import { Anchor, ModeConfig, TimerState } from '../core/timer/types';
 
@@ -19,7 +19,7 @@ const TICK_MS = 100;
 
 type Options = {
   config: ModeConfig;
-  onCue: (cue: CueName) => void;
+  onCue: (cue: Cue) => void;
   onComplete: (state: TimerState) => void;
 };
 

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { canStep, StepperSpec } from '../core/config/steppers';
+import { useTapHaptic } from '../hooks/useTapHaptic';
 import { font, type } from '../theme/fonts';
 import { color, radius, space, touch } from '../theme/tokens';
 
@@ -61,6 +62,7 @@ function StepButton({
   enabled: boolean;
   onStep: () => void;
 }) {
+  const tap = useTapHaptic();
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const delay = useRef(REPEAT_START_MS);
 
@@ -74,16 +76,18 @@ function StepButton({
   useEffect(() => stop, [stop]);
 
   const repeat = useCallback(() => {
+    tap();
     onStep();
     delay.current = Math.max(REPEAT_MIN_MS, delay.current * REPEAT_ACCEL);
     timer.current = setTimeout(repeat, delay.current);
-  }, [onStep]);
+  }, [onStep, tap]);
 
   const onPressIn = useCallback(() => {
     if (!enabled) return;
+    tap();
     onStep();
     timer.current = setTimeout(repeat, HOLD_DELAY_MS);
-  }, [enabled, onStep, repeat]);
+  }, [enabled, onStep, repeat, tap]);
 
   return (
     <Pressable

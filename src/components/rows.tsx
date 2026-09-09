@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { useTapHaptic } from '../hooks/useTapHaptic';
 import { type } from '../theme/fonts';
 import { color, radius, touch } from '../theme/tokens';
 
@@ -23,6 +24,7 @@ export function SettingRow({
   height?: number;
   right?: ReactNode;
 }) {
+  const tap = useTapHaptic();
   const body = (
     <View
       style={[
@@ -49,7 +51,10 @@ export function SettingRow({
   if (!onPress) return body;
   return (
     <Pressable
-      onPress={onPress}
+      onPress={() => {
+        tap();
+        onPress();
+      }}
       accessibilityRole="button"
       style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
     >
@@ -86,9 +91,13 @@ export function Toggle({
   onAccent?: string;
   label?: string;
 }) {
+  const tap = useTapHaptic();
   return (
     <Pressable
-      onPress={() => onChange(!on)}
+      onPress={() => {
+        tap();
+        onChange(!on);
+      }}
       accessibilityRole="switch"
       accessibilityState={{ checked: on }}
       accessibilityLabel={label}
@@ -123,9 +132,13 @@ export function ModeRow({
   label: string;
   onPress: () => void;
 }) {
+  const tap = useTapHaptic();
   return (
     <Pressable
-      onPress={onPress}
+      onPress={() => {
+        tap();
+        onPress();
+      }}
       accessibilityRole="button"
       accessibilityLabel={label}
       style={({ pressed }) => [styles.modeRow, { opacity: pressed ? 0.7 : 1 }]}

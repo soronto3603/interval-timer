@@ -411,18 +411,63 @@ Setup 10번의 `카운트 방식` ROUNDS/REPS 선택이 이 라벨을 결정한�
 | 시계 역주행 | `max(0, …)` 클램프. 5초 초과 시 `startedAt` 재앵커 |
 | 잘못된 라우트 파라미터 (`setup/xxx`) | Home으로 리다이렉트 |
 
-## 10. 사운드 큐
+## 10. 사운드 & 햅틱
 
-3개 큐: `countdown` (3·2·1) · `workStart` · `restStart`.
+음원 6개를 쓴다 (`assets/sounds/`, mono 48kHz, 합계 384KB). `ready_tick` 하나를
+배속만 바꿔 준비 진입과 3·2·1 에 재사용한다 — `shouldCorrectPitch: false` 로 두면
+배속이 곧 피치다.
 
-`expo-audio`의 `createAudioPlayer`로 앱 시작 시 플레이어 3개를 만들어 두고,
-발화할 때 `seekTo(0)` 후 `play()`. 훅이 아닌 함수라 서비스 레이어에 둘 수 있다.
+```
+ui_tap            80ms   조작 피드백용 짧은 클릭
+ready_tick       420ms   드라이한 전자 tick (피치 4단계로 재사용)
+warning_10s      320ms   낮은 하강형 알림 (150→56Hz)
+work_start       920ms   상승형 시작음 (228→570→880Hz)
+rest_start       820ms   하강형 전환음
+workout_complete 1420ms  3음 상승 완료음 (143→293→659Hz)
+```
 
-음원은 `scripts/gen-cues.py` 가 합성한다 (라이선스 문제 없음, 합계 48KB):
-countdown 은 1000Hz 55ms 틱, workStart 는 1175→1568Hz 상승 2연음,
-restStart 는 698Hz 230ms 단음. 톤을 바꾸려면 그 스크립트를 고치고 다시 돌린다.
+핵심은 WORK · REST · COMPLETE 가 서로 완전히 다른 소리라는 것이다. 운동 중 화면을
+보지 않아도 무엇이 시작됐는지 들려야 한다.
 
-진동은 `expo-haptics`. 큐 설정과 별개로 `vibration` 스위치가 전체를 끈다.
+### 이벤트 매핑
+
+| 이벤트 | 음원 | 배속 | 햅틱 |
+|---|---|---|---|
+| 모드 선택 · 스테퍼 · 토글 | — | — | Light |
+| START 탭 | `ui_tap` | 1.0 | Medium |
+| GET READY 진입 | `ready_tick` | 0.84 | Medium |
+| 카운트다운 3 · 2 | `ready_tick` | 1.0 · 1.06 | Light |
+| 카운트다운 1 | `ready_tick` | 1.19 | Medium |
+| WORK 시작 | `work_start` | 1.0 | Heavy |
+| 10초 남음 | `warning_10s` | 1.0 | Light |
+| REST 시작 | `rest_start` | 1.0 | Medium |
+| 일시정지 · 재개 · 리셋/종료 확인 | — | — | Medium |
+| COMPLETE | `workout_complete` | 1.0 | Heavy + 220ms 뒤 Light |
+
+prep 은 3초이므로 카운트다운 3 의 임계를 "통과"하지 않는다. 대신 그 순간에
+`readyEnter` 가 울려서 결과적으로 03 → 02 → 01 이 서로 다른 소리로 들린다.
+
+### 10초 경고는 짧은 구간에서 생략한다
+
+타바타 기본 휴식이 10초다. 그대로 두면 경고가 `rest_start` 바로 뒤에 붙어 두 소리가
+겹치고, "막판 진입"이라는 뜻도 사라진다. 구간이 **15초를 넘을 때만** 울린다.
+
+### 설정 토글은 디자인의 3개를 유지한다
+
+큐 종류가 토글보다 많으므로 묶는다 (디자인 15번에 행을 추가하지 않기 위해).
+
+```
+카운트다운 알림 → readyEnter · countdown 3·2·1 · warn10
+운동 시작 알림   → workStart · START 탭
+휴식 시작 알림   → restStart
+완료음          → 토글 없음. 셋이 전부 꺼져 있을 때만 함께 무음
+```
+
+완주 보상은 끌 이유가 적어 별도 토글을 두지 않았다.
+
+진동은 `expo-haptics` 의 Light/Medium/Heavy 3단계를 쓰고, `vibration` 스위치 하나가
+전체를 끈다. 일시정지 계열은 소리 없이 촉각만 준다 — 운동 중에 소음을 더하는 것보다
+즉각적인 손끝 반응이 낫다.
 
 ## 11. 테스트
 
@@ -434,7 +479,9 @@ restStart 는 698Hz 230ms 단음. 톤을 바꾸려면 그 스크립트를 고치
 - `derive` — 경계 정확히 그 ms, 경계 −1ms / +1ms
 - 일시정지 중 파생값 고정, 재개 후 연속성
 - **백그라운드 점프** — 5분을 건너뛰고 올바른 세그먼트에 착지
-- **큐 억제** — 점프 시 발화 0회
+- **큐 억제** — 점프 시 발화 0회 (완료음 포함)
+- **10초 경고** — 임계 통과 시 발화, 15초 이하 구간에서는 생략
+- **카운트다운 단계** — 한 틱에 여러 단계가 지나가면 가장 늦은 단계만
 - 시계 역주행 재앵커
 - 라운드 1 / 라운드 99 경계
 

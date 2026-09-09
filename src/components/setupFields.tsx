@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { STEPPERS, step } from '@/core/config/steppers';
 import { formatCountdown } from '@/core/timer/format';
 import { ForTimeConfig } from '@/core/timer/types';
+import { useTapHaptic } from '@/hooks/useTapHaptic';
 import { useT } from '@/i18n/useT';
 import { type } from '@/theme/fonts';
 import { color, radius, space } from '@/theme/tokens';
@@ -20,6 +21,7 @@ export function ChoicePair<T extends string>({
   selected: T;
   onSelect: (value: T) => void;
 }) {
+  const tap = useTapHaptic();
   return (
     <View>
       <Text style={[type.ko(19, 700), styles.label]}>{label}</Text>
@@ -29,7 +31,10 @@ export function ChoicePair<T extends string>({
           return (
             <Pressable
               key={option.value}
-              onPress={() => onSelect(option.value)}
+              onPress={() => {
+                tap();
+                onSelect(option.value);
+              }}
               accessibilityRole="radio"
               accessibilityState={{ selected: active }}
               style={({ pressed }) => [

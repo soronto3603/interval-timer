@@ -9,7 +9,7 @@ import { PrepLayout, RunningLayout } from '@/components/TimerLayouts';
 import { TimerSlot } from '@/components/TimerSlot';
 import { MODE_IDS } from '@/core/config/defaults';
 import { totalMsOf } from '@/core/config/totals';
-import { CueName } from '@/core/timer/cues';
+import { Cue } from '@/core/timer/cues';
 import { formatCountdown } from '@/core/timer/format';
 import { present, TimerView } from '@/core/timer/present';
 import { ModeConfig, ModeId, PREP_MS, TimerState } from '@/core/timer/types';
@@ -17,7 +17,7 @@ import { useIntervalTimer } from '@/hooks/useIntervalTimer';
 import { useKeepAwake } from '@/hooks/useKeepAwake';
 import { useAllowRotation, useOrientation } from '@/hooks/useOrientation';
 import { useT } from '@/i18n/useT';
-import { playCue, tapFeedback } from '@/services/cues';
+import { controlFeedback, playCue, tapFeedback } from '@/services/cues';
 import { usePresets } from '@/store/presets';
 import { useSettings } from '@/store/settings';
 
@@ -59,7 +59,7 @@ function Timer({ mode }: { mode: ModeId }) {
   }, [mode, markUsed]);
 
   const onCue = useCallback(
-    (cue: CueName) => {
+    (cue: Cue) => {
       playCue(cue, { sound: settings.cues, vibration: settings.vibration });
     },
     [settings.cues, settings.vibration],
@@ -89,6 +89,17 @@ function Timer({ mode }: { mode: ModeId }) {
   const view = present(state, config);
   const paused = state.phase === 'paused';
 
+  // 일시정지 · 재개 · 확인 다이얼로그는 소리 없이 촉각만 준다.
+  // 운동 중에 소음을 더하는 것보다 즉각적인 손끝 반응이 낫다.
+  const control = useCallback(() => {
+    controlFeedback(settings.vibration);
+  }, [settings.vibration]);
+
+  const pauseWithFeedback = useCallback(() => {
+    control();
+    pause();
+  }, [control, pause]);
+
   // Android 백 버튼 (설계 스펙 §5)
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -100,11 +111,11 @@ function Timer({ mode }: { mode: ModeId }) {
         setDialog('end');
         return true;
       }
-      pause();
+      pauseWithFeedback();
       return true;
     });
     return () => sub.remove();
-  }, [dialog, paused, pause]);
+  }, [dialog, paused, pauseWithFeedback]);
 
   const onTally = useCallback(
     (delta: 1 | -1) => {
@@ -125,9 +136,18 @@ function Timer({ mode }: { mode: ModeId }) {
             <PausedOverlay
               summary={pausedSummary(view, state)}
               landscape={dims.landscape}
-              onResume={resume}
-              onReset={() => setDialog('reset')}
-              onEnd={() => setDialog('end')}
+              onResume={() => {
+                control();
+                resume();
+              }}
+              onReset={() => {
+                control();
+                setDialog('reset');
+              }}
+              onEnd={() => {
+                control();
+                setDialog('end');
+              }}
             />
           )}
 
@@ -139,12 +159,16 @@ function Timer({ mode }: { mode: ModeId }) {
               primaryLabel="RESET"
               primaryVariant="rest"
               onPrimary={() => {
+                control();
                 setDialog(null);
                 setTally(0);
                 reset();
               }}
               secondaryLabel="CANCEL"
-              onSecondary={() => setDialog(null)}
+              onSecondary={() => {
+                control();
+                setDialog(null);
+              }}
             />
           )}
 
@@ -155,9 +179,13 @@ function Timer({ mode }: { mode: ModeId }) {
               body={t.endBody}
               landscape={dims.landscape}
               primaryLabel="KEEP GOING"
-              onPrimary={() => setDialog(null)}
+              onPrimary={() => {
+                control();
+                setDialog(null);
+              }}
               secondaryLabel="END"
               onSecondary={() => {
+                control();
                 setDialog(null);
                 router.replace('/');
               }}
@@ -173,7 +201,7 @@ function Timer({ mode }: { mode: ModeId }) {
           view={view}
           dims={dims}
           hint={t.holdToPause}
-          onPause={pause}
+          onPause={pauseWithFeedback}
           onTap={() => tapFeedback(settings.vibration)}
           slot={
             <TimerSlot

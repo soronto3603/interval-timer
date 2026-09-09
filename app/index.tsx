@@ -10,7 +10,9 @@ import { describeConfig } from '@/core/config/describe';
 import { ModeId } from '@/core/timer/types';
 import { useLockPortrait } from '@/hooks/useOrientation';
 import { useT } from '@/i18n/useT';
+import { startFeedback } from '@/services/cues';
 import { usePresets } from '@/store/presets';
+import { useSettings } from '@/store/settings';
 import { type } from '@/theme/fonts';
 import { color, radius, space } from '@/theme/tokens';
 import { PresetSheet } from '@/components/PresetSheet';
@@ -25,6 +27,13 @@ export default function HomeScreen() {
 
   const presets = usePresets((s) => s.presets);
   const lastUsedMode = usePresets((s) => s.lastUsedMode);
+  const cues = useSettings((s) => s.cues);
+  const vibration = useSettings((s) => s.vibration);
+
+  const startWorkout = (mode: ModeId) => {
+    startFeedback({ sound: cues, vibration });
+    router.push(`/timer?mode=${mode}`);
+  };
 
   const quickMode: ModeId = lastUsedMode ?? 'tabata';
   const recent = lastUsedMode ? presets[lastUsedMode] : null;
@@ -44,7 +53,7 @@ export default function HomeScreen() {
         <Text style={[type.ko(24, 700), styles.title]}>{t.selectWorkout}</Text>
 
         <Pressable
-          onPress={() => router.push(`/timer?mode=${quickMode}`)}
+          onPress={() => startWorkout(quickMode)}
           accessibilityRole="button"
           accessibilityLabel="Quick start"
           style={({ pressed }) => [styles.quick, { opacity: pressed ? 0.85 : 1 }]}
@@ -87,7 +96,7 @@ export default function HomeScreen() {
 
         {recent ? (
           <Pressable
-            onPress={() => router.push(`/timer?mode=${lastUsedMode}`)}
+            onPress={() => startWorkout(quickMode)}
             accessibilityRole="button"
             style={({ pressed }) => [
               styles.recent,

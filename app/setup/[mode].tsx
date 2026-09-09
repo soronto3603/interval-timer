@@ -11,6 +11,8 @@ import { totalMsOf } from '@/core/config/totals';
 import { formatCountdown } from '@/core/timer/format';
 import { ModeConfig, ModeId } from '@/core/timer/types';
 import { useT } from '@/i18n/useT';
+import { startFeedback } from '@/services/cues';
+import { useSettings } from '@/store/settings';
 import { usePresets } from '@/store/presets';
 import { type } from '@/theme/fonts';
 import { color, space } from '@/theme/tokens';
@@ -21,6 +23,8 @@ export default function SetupScreen() {
   const t = useT();
   const presets = usePresets((s) => s.presets);
   const setPreset = usePresets((s) => s.setPreset);
+  const cues = useSettings((s) => s.cues);
+  const vibration = useSettings((s) => s.vibration);
 
   // 잘못된 경로로 들어온 경우 (설계 스펙 §9)
   if (!MODE_IDS.includes(params.mode as ModeId)) {
@@ -159,7 +163,10 @@ export default function SetupScreen() {
 
       <CTAButton
         label="START"
-        onPress={() => router.push(`/timer?mode=${mode}`)}
+        onPress={() => {
+          startFeedback({ sound: cues, vibration });
+          router.push(`/timer?mode=${mode}`);
+        }}
         style={styles.cta}
       />
     </ScreenFrame>

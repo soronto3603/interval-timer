@@ -5,7 +5,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MODE_IDS, MODE_LABEL } from '@/core/config/defaults';
 import { describeConfig } from '@/core/config/describe';
 import { useT } from '@/i18n/useT';
+import { startFeedback } from '@/services/cues';
 import { usePresets } from '@/store/presets';
+import { useSettings } from '@/store/settings';
 import { type } from '@/theme/fonts';
 import { color, layout, radius, space, touch } from '@/theme/tokens';
 
@@ -18,6 +20,8 @@ import { color, layout, radius, space, touch } from '@/theme/tokens';
 export function PresetSheet({ onClose }: { onClose: () => void }) {
   const t = useT();
   const presets = usePresets((s) => s.presets);
+  const cues = useSettings((s) => s.cues);
+  const vibration = useSettings((s) => s.vibration);
   const insets = useSafeAreaInsets();
 
   return (
@@ -36,6 +40,7 @@ export function PresetSheet({ onClose }: { onClose: () => void }) {
             <Pressable
               key={mode}
               onPress={() => {
+                startFeedback({ sound: cues, vibration });
                 onClose();
                 router.push(`/timer?mode=${mode}`);
               }}
