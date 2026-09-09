@@ -22,10 +22,26 @@ Vite MPA 로 빌드해 `/privacy/` 가 실제 파일이 된다. Play Console 이
 
 ```
 npm install
-npm run dev       # http://localhost:5173
-npm run build     # tsc --noEmit && vite build → dist/
-npm run preview   # 빌드 결과 확인
+npm run dev              # http://localhost:5173
+npm run build            # tsc --noEmit && vite build → dist/
+npm run preview          # 빌드 결과 확인
+npm run verify:isolated  # Netlify 와 같은 조건으로 빌드 (아래 참고)
 ```
+
+### 로컬 빌드 통과를 믿지 말 것
+
+`web/` 이 RN 저장소 안에 있어서, 로컬에서 `tsc` 는 타입을 찾을 때 **상위
+디렉터리의 `node_modules/@types` 까지 올라간다**. 그래서 `web/package.json` 에
+빠진 의존성이 있어도 로컬에서는 통과하고 Netlify 에서만 깨진다.
+
+첫 배포가 정확히 이것 때문에 실패했다 — `@types/node` 가 선언돼 있지 않았는데
+루트(Expo 앱)의 것이 새어 들어와 로컬 빌드가 통과했다.
+
+`npm run verify:isolated` 는 `web/` 만 임시 디렉터리에 복사해 `npm ci` 후
+빌드한다. 의존성을 건드렸으면 푸시 전에 이걸 돌린다.
+
+`tsconfig.json` 의 `typeRoots` 도 `./node_modules/@types` 로 못박아 두었다.
+그래서 `vite/client` 대신 `src/vite-env.d.ts` 에서 CSS 선언만 직접 한다.
 
 ## 배포
 
